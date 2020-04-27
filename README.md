@@ -1,1 +1,1 @@
-Phần mềm bán shop thời trang
+Phần mềm di động shop thời trang
