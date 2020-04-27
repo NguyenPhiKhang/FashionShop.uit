@@ -1,1 +1,1 @@
-# FashionShop.uit
+Phần mềm bán shop thời trang
