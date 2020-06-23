@@ -1,15 +1,24 @@
 
+import 'package:fashionshop/src/graphql/QueryMutation.dart';
 import 'package:fashionshop/src/resources/RegisterScreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+
+import '../graphql-config.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => LoginScreenState();
+
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  @override
+  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+  TextEditingController txt_email = TextEditingController();
+  TextEditingController txt_password = TextEditingController();
+QueryMutation  queryMutation = QueryMutation();
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -49,6 +58,7 @@ class LoginScreenState extends State<LoginScreen> {
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
                 child: TextField(
+                  controller: txt_email,
                   style: TextStyle(fontSize: 18, color: Colors.black),
                   autocorrect: false,
                   decoration: InputDecoration(
@@ -64,6 +74,7 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                 )),
             TextField(
+              controller: txt_password,
               style: TextStyle(fontSize: 18, color: Colors.black),
               obscureText: true,
               autocorrect: false,
@@ -85,9 +96,19 @@ class LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 height: 60,
                 child: RaisedButton(
-                  onPressed: () {
-                    print("click login!");
+                  onPressed: () async {
+                   GraphQLClient _client =  graphQLConfiguration.clientToQuery();
+ QueryResult result = await _client.query (
+QueryOptions(
+  documentNode: gql(queryMutation.Login(txt_email.text, txt_password.text)),
+
+)
+ );
+ if (result.data["data"]!=null)
+       print(result.data["data"].toString());
+
                   },
+
                   child: Text(
                     "Sign In",
                     style: TextStyle(color: Colors.white, fontSize: 18),
