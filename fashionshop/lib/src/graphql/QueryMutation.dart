@@ -1,17 +1,9 @@
-class QueryMutation
-{
-  String Login(String email,String password)
-  {
-    return '''
-  query {
-            login(email:"$email",password:"$password")
+String Login = '''
+  query Login(\$email: String!, \$password: String!){
+            login(email:\$email, password:\$password)
            {
               accountId
               token
            }
         }
-                  ''';
-
-  }
-
-}
+   ''';

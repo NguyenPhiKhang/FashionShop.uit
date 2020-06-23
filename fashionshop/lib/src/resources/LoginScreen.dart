@@ -1,23 +1,21 @@
-
+import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
 import 'package:fashionshop/src/graphql/QueryMutation.dart';
 import 'package:fashionshop/src/resources/RegisterScreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-import '../graphql-config.dart';
+GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
 class LoginScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => LoginScreenState();
-
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+  GraphQLClient _client = graphQLConfiguration.clientToQuery();
   TextEditingController txt_email = TextEditingController();
   TextEditingController txt_password = TextEditingController();
-QueryMutation  queryMutation = QueryMutation();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,18 +95,17 @@ QueryMutation  queryMutation = QueryMutation();
                 height: 60,
                 child: RaisedButton(
                   onPressed: () async {
-                   GraphQLClient _client =  graphQLConfiguration.clientToQuery();
- QueryResult result = await _client.query (
-QueryOptions(
-  documentNode: gql(queryMutation.Login(txt_email.text, txt_password.text)),
-
-)
- );
- if (result.data["data"]!=null)
-       print(result.data["data"].toString());
-
+                    QueryResult result = await _client.query(QueryOptions(
+                      documentNode: gql(Login),
+                      variables: {
+                        "email": txt_email.text,
+                        "password": txt_password.text
+                      }
+                    ));
+                    if(!result.hasException){
+                      _showDialog(context);
+                    }
                   },
-
                   child: Text(
                     "Sign In",
                     style: TextStyle(color: Colors.white, fontSize: 18),
@@ -119,63 +116,6 @@ QueryOptions(
                 ),
               ),
             ),
-//            SizedBox(
-//              height: 30.0,
-//              child: Text(
-//                "Or",
-//                style: TextStyle(fontSize: 18.0, color: Colors.grey),
-//              ),
-//            ),
-//            Padding(
-//              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-//              child: SizedBox(
-//                width: double.infinity,
-//                height: 60,
-//                child: RaisedButton.icon(
-//                  onPressed: () {},
-//                  icon: Image.asset(
-//                    "assets/ic_google.png",
-//                    width: 30.0,
-//                  ),
-//                  label: Text("Login with Google"),
-//                  color: Color(0xffffffff),
-//                  shape: RoundedRectangleBorder(
-//                    side: BorderSide(
-//                        color: Color(0xccd2d2d2),
-//                        width: 1,
-//                        style: BorderStyle.solid),
-//                    borderRadius: BorderRadius.all(
-//                      Radius.circular(15.0),
-//                    ),
-//                  ),
-//                ),
-//              ),
-//            ),
-//            Padding(
-//              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-//              child: SizedBox(
-//                width: double.infinity,
-//                height: 60,
-//                child: RaisedButton.icon(
-//                  onPressed: () {},
-//                  icon: Image.asset(
-//                    "assets/ic_google.png",
-//                    width: 30.0,
-//                  ),
-//                  label: Text("Login with Facebook"),
-//                  color: Color(0xffffffff),
-//                  shape: RoundedRectangleBorder(
-//                    side: BorderSide(
-//                        color: Color(0xffd2d2d2),
-//                        width: 1,
-//                        style: BorderStyle.solid),
-//                    borderRadius: BorderRadius.all(
-//                      Radius.circular(15.0),
-//                    ),
-//                  ),
-//                ),
-//              ),
-//            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
               child: RichText(
@@ -246,32 +186,32 @@ QueryOptions(
                     margin: EdgeInsets.only(right: 5, top: 10),
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: Colors.grey),
-                        borderRadius: BorderRadius.all(Radius.circular(25))
-                    ),
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
                     child: IconButton(
-                      onPressed: () {print("google click!");},
+                      onPressed: () {
+                        print("google click!");
+                      },
                       icon: Image.asset(
                         "assets/ic_google.png",
                         width: 30,
                       ),
-                    )
-                ),
+                    )),
                 Container(
                     width: 50,
                     height: 50,
                     margin: EdgeInsets.only(left: 5, top: 10),
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: Colors.grey),
-                        borderRadius: BorderRadius.all(Radius.circular(25))
-                    ),
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
                     child: IconButton(
-                      onPressed: () {print("facebook click!");},
+                      onPressed: () {
+                        print("facebook click!");
+                      },
                       icon: Image.asset(
                         "assets/ic_facebook.png",
                         width: 30,
                       ),
-                    )
-                )
+                    ))
               ],
             )
           ],
@@ -279,4 +219,27 @@ QueryOptions(
       ),
     ));
   }
+}
+
+void _showDialog(BuildContext context) {
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Alert Dialog title"),
+        content: new Text("Alert Dialog body"),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text("Close"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
