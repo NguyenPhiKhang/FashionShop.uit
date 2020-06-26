@@ -1,7 +1,9 @@
+import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
 import 'package:fashionshop/src/resources/LoginScreen.dart';
 import 'package:fashionshop/src/resources/RegisterScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
@@ -14,24 +16,28 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
         client: graphQLConfiguration.client,
         child: CacheProvider(
-            child: MaterialApp(
+            child: BlocProvider(
+              create: (BuildContext context) =>LoginBloc(),
+
+              child: MaterialApp(
           title: 'Fashion Shop',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: const MaterialColor(0xFF5BBABB, const <int, Color>{
-              50: const Color(0xFF5BBABB),
-              100: const Color(0xFF5BBABB),
-              200: const Color(0xFF5BBABB),
-              300: const Color(0xFF5BBABB),
-              400: const Color(0xFF5BBABB),
-              500: const Color(0xFF5BBABB),
-              600: const Color(0xFF5BBABB),
-              700: const Color(0xFF5BBABB),
-              800: const Color(0xFF5BBABB),
-              900: const Color(0xFF5BBABB),
-            }),
+              primarySwatch: const MaterialColor(0xFF5BBABB, const <int, Color>{
+                50: const Color(0xFF5BBABB),
+                100: const Color(0xFF5BBABB),
+                200: const Color(0xFF5BBABB),
+                300: const Color(0xFF5BBABB),
+                400: const Color(0xFF5BBABB),
+                500: const Color(0xFF5BBABB),
+                600: const Color(0xFF5BBABB),
+                700: const Color(0xFF5BBABB),
+                800: const Color(0xFF5BBABB),
+                900: const Color(0xFF5BBABB),
+              }),
           ),
           home: LoginScreen(),
-        )));
+        ),
+            )));
   }
 }

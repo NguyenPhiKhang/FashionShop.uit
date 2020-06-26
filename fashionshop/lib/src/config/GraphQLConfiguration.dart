@@ -4,7 +4,8 @@ import "package:graphql_flutter/graphql_flutter.dart";
 class GraphQLConfiguration {
   static Link link = null;
   static HttpLink httpLink = HttpLink(
-    uri: "http://localhost:8000/graphql",
+    uri: "https://fashionshopuit-server.azurewebsites.net/graphql",
+    //uri: "https://10.0.198.164:8000/graphql",
   );
 
   static void setToken(String token) {

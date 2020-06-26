@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   graphql_flutter: ^3.0.0
   http: ^0.12.1
+  equatable: ^1.2.0
+  flutter_bloc: ^4.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -30,6 +32,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  connectivity: ^0.4.8+6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
