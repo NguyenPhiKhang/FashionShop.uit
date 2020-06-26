@@ -137,6 +137,9 @@ class RegisterScreenState extends State<RegisterScreen> {
                           if (value.isEmpty) {
                             return 'Không được để trống phần này';
                           }
+                          if(value.length <6)
+                            return 'Mật khẩu phải từ 6 kí tự trở lên.';
+
 
                           return null;
                         },
@@ -160,9 +163,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                           child: TextFormField(
                               validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Không được để trống phần này';
-                                }
+
                                 if(txt_password.text!=value)
                                   return 'Xác nhận mật khẩu không đúng.';
                                 return null;
