@@ -59,7 +59,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                         child: Text(
-                          "Let's Get Started",
+                          "Fashion Shop!",
                           style: TextStyle(
                               fontSize: 22,
                               color: Color(0xff333333),
@@ -69,7 +69,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 6),
                         child: Text(
-                          "Create an new account",
+                          "Tạo một tài khoản mới.",
                           style: TextStyle(fontSize: 16, color: const Color(
                               0xff9098b1)),
                         ),
@@ -83,6 +83,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                               }
 
                               return null;
+                            },
+                            onChanged: (value)
+                            {
+                              _formKey.currentState.validate();
                             },
                             style: TextStyle(fontSize: 18, color: Colors.black),
                             autocorrect: false,
@@ -114,6 +118,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                               if(!regex.hasMatch(value)) return 'Tên email không đúng cấu trúc';
                               return null;
                             },
+                            onChanged: (value)
+                            {
+                              _formKey.currentState.validate();
+                            },
                             controller: txt_email,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                             autocorrect: false,
@@ -143,6 +151,10 @@ class RegisterScreenState extends State<RegisterScreen> {
 
                           return null;
                         },
+                        onChanged: (value)
+                        {
+                          _formKey.currentState.validate();
+                        },
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         obscureText: true,
                         autocorrect: false,
@@ -168,6 +180,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                                   return 'Xác nhận mật khẩu không đúng.';
                                 return null;
                               },
+                            onChanged: (value)
+                            {
+                              _formKey.currentState.validate();
+                            },
 
                             style: TextStyle(fontSize: 18, color: Colors.black),
                             obscureText: true,
@@ -198,7 +214,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                               context.bloc<RegisterBloc>().add(RegisterButtonPressed(username:txt_email.text , password: txt_password.text, idPermission:"5eee3d622c331a381bdc6b04"));
                             },
                             child: Text(
-                              "Sign Up",
+                              "Đăng ký",
                               style: TextStyle(color: Colors.white, fontSize: 18),
                             ),
                             color: Color(0xFF4ab3b5),
@@ -212,7 +228,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                         child: RichText(
                           text: TextSpan(
-                              text: "Already have a account? ",
+                              text: "Bạn đã có tài khoản rồi? ",
                               style: TextStyle(
                                   color: Color(0xff606470), fontSize: 15),
                               children: <TextSpan>[
@@ -225,7 +241,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                                                 builder: (context) =>
                                                     LoginScreen()));
                                       },
-                                    text: "Login",
+                                    text: "Đăng nhập",
                                     style: TextStyle(
                                         color: Color(0xcc4199F8),
                                         fontSize: 15,

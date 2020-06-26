@@ -69,7 +69,7 @@ class LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                         child: Text(
-                          "Welcome to Fashion Shop",
+                          "Fashion Shop",
                           style: TextStyle(
                               fontSize: 22,
                               color: Color(0xff333333),
@@ -79,7 +79,7 @@ class LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 5, 0, 6),
                         child: Text(
-                          "Sign in to continue!",
+                          "Đăng ký để tiếp tục!",
                           style: TextStyle(fontSize: 16, color: const Color(
                               0xff9098b1)),
                         ),
@@ -98,6 +98,10 @@ class LoginScreenState extends State<LoginScreen> {
 
                               if(!regex.hasMatch(value)) return 'Tên email không đúng cấu trúc';
                               return null;
+                            },
+                            onChanged: (value)
+                            {
+                              _formKey.currentState.validate();
                             },
                             style: TextStyle(fontSize: 18, color: Colors
                                 .black),
@@ -128,6 +132,10 @@ class LoginScreenState extends State<LoginScreen> {
 
 
                           return null;
+                        },
+                        onChanged: (value)
+                        {
+                          _formKey.currentState.validate();
                         },
                         style: TextStyle(fontSize: 18, color: Colors.black),
                         obscureText: true,
@@ -187,7 +195,7 @@ class LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
                         child: RichText(
                             text: TextSpan(
-                              text: "Forogt Password?",
+                              text: "Quên mật khẩu?",
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   print("Forgot password?");
@@ -202,7 +210,7 @@ class LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                         child: RichText(
                           text: TextSpan(
-                              text: "Don't have a account? ",
+                              text: "Chưa có tài khoản? ",
                               style: TextStyle(
                                   color: Color(0xff606470), fontSize: 15),
                               children: <TextSpan>[
@@ -215,7 +223,7 @@ class LoginScreenState extends State<LoginScreen> {
                                                 builder: (context) =>
                                                     RegisterScreen()));
                                       },
-                                    text: "Register",
+                                    text: "Đăng ký",
                                     style: TextStyle(
                                         color: Color(0xcc4199F8),
                                         fontSize: 15,
