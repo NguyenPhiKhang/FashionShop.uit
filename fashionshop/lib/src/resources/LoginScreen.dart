@@ -1,9 +1,14 @@
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginEvent.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginState.dart';
+import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
+import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
 import 'package:fashionshop/src/graphql/QueryMutation.dart';
+import 'package:fashionshop/src/resources/ExploreScreen.dart';
+import 'package:fashionshop/src/resources/HomePage.dart';
 import 'package:fashionshop/src/resources/HomeScreen.dart';
+import 'package:fashionshop/src/resources/ProductScreen.dart';
 import 'package:fashionshop/src/resources/RegisterScreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   Widget build(BuildContext context) {
     LoginBloc loginBloc = context.bloc<LoginBloc>();
+
     final _formKey = GlobalKey<FormState>();
     return BlocBuilder<LoginBloc, LoginState>(
           builder: (context, state) {
@@ -35,7 +41,14 @@ class LoginScreenState extends State<LoginScreen> {
               });
             }
             if (state is LoginOk) {
-              return HomeScreen();
+              return BlocProvider<ProductBloc>(
+                  create: (context){
+                    return ProductBloc(
+
+                    );
+                  },
+                  child:Products_Screen(title: "product",)     //HomePage();
+              );
             }
             if(state is LoginLoading) {
               return Scaffold(

@@ -14,6 +14,7 @@ class RegisterScreen extends StatefulWidget {
 class RegisterScreenState extends State<RegisterScreen> {
   TextEditingController txt_email = TextEditingController();
   TextEditingController txt_password = TextEditingController();
+  TextEditingController txt_name = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -77,6 +78,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       Padding(
                           padding: const EdgeInsets.fromLTRB(0, 50, 0, 10),
                           child: TextFormField(
+                            controller: txt_name,
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Không được để trống phần này';

@@ -17,12 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
 
-    return BlocProvider.value(
+          return BlocProvider.value(
       value: BlocProvider.of<LoginBloc>(context),
-      child: Container(
-      child: Center(
-        child: Text(BlocProvider.of<LoginBloc>(context).getToken,style: TextStyle(fontSize: 5),),
-      ),
+        child: Container(
+          child: Center(
+            child: Text(BlocProvider.of<LoginBloc>(context).getToken,style: TextStyle(fontSize: 5),),
+          ),
     ));
 //    return Container(
 //      child: Center(
