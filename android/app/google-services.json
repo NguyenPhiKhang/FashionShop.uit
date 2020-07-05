@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "387631960846",
+    "firebase_url": "https://e-commerce-app-d1938.firebaseio.com",
+    "project_id": "e-commerce-app-d1938",
+    "storage_bucket": "e-commerce-app-d1938.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387631960846:android:d1fc88dc22f6b5b1503d5f",
+        "android_client_info": {
+          "package_name": "com.khangkhang.fashionshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387631960846-p6k826382coucsg537o2ihijssodg1ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLD80BtBRRooy3aTpahp4wW7AWxMgHDMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387631960846-p6k826382coucsg537o2ihijssodg1ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
