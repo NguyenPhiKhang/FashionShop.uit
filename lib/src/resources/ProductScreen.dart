@@ -34,7 +34,7 @@ class _Products_ScreenState extends State<Products_Screen> {
     return  BlocBuilder<ProductBloc,ProductsState>(
            builder:(context,state) {
              return Scaffold(
-               backgroundColor: Color(0xffE5E5E5),
+               backgroundColor: Color(0xffE7E7E7),
                appBar: AppBar(
                  title: Center(child: Text(widget.title)),
 
@@ -108,6 +108,7 @@ class _Products_ScreenState extends State<Products_Screen> {
                      ),
                    ),
                    Container(
+                     margin: EdgeInsets.only(left:10),
                      height: MediaQuery.of(context).size.height-150,
                      child: CustomScrollView(
                            controller: _scrollController,
@@ -117,9 +118,9 @@ class _Products_ScreenState extends State<Products_Screen> {
                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
 
                                crossAxisCount: 2,
-                               childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+20),
-                               //mainAxisSpacing: 4.0,
-                               crossAxisSpacing: 4.0,
+                               childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+15),
+                               mainAxisSpacing: 0.0,
+                               crossAxisSpacing: 0.0,
                                //childAspectRatio: AppSizes.tile_width / AppSizes.tile_height,
                              ),
                              delegate: SliverChildBuilderDelegate(
@@ -128,14 +129,29 @@ class _Products_ScreenState extends State<Products_Screen> {
                                    (BuildContext context, int index) {
 
                                  return Container(
-                                   margin: EdgeInsets.only(top: 10,left: 10,right: 10),
-                                   color: Colors.black,
+                                   margin: EdgeInsets.only(top: 10,right: 10),
+                                   color: Colors.white.withOpacity(0),
                                    //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                    child:GestureDetector(
                                        child: Container(
 
                                          height: MediaQuery.of(context).size.height/3+20,
-                                         decoration: BoxDecoration(color: Colors.black,backgroundBlendMode: BlendMode.colorBurn,borderRadius: BorderRadius.circular(0),border: Border.all(color: Colors.white)),
+                                         decoration: BoxDecoration(
+                                             color: Colors.white,
+                                             backgroundBlendMode: BlendMode.colorBurn,
+                                             borderRadius: BorderRadius.circular(8),
+                                             border: Border.all(color: Colors.white),
+//                                             boxShadow: [
+//                                               BoxShadow(
+//                                                 color: Colors.grey.withOpacity(0.5),
+//                                                 spreadRadius: 5,
+//                                                 blurRadius: 7,
+//                                                 offset: Offset(0, 3),
+//
+//
+//                                               ),
+//                                             ],
+                                         ),
                                          child:
                                          ProductCard(product: state.data[index],index: index,),
 

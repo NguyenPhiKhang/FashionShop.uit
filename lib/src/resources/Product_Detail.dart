@@ -1,6 +1,7 @@
 
 import 'dart:ffi';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,16 @@ class Product_Detail extends StatefulWidget {
 class _Product_DetailState extends State<Product_Detail> {
   List<AttributeValue> listSize =[];
   List<AttributeValue> listColor =[];
+  int _current =0;
   bool isExpanded =false;
-
+  List<T> map<T> (List list, Function handler){
+    List<T> result =[];
+    for(var i=0;i<list.length;i++)
+    {
+      result.add(handler(i,list[i]));
+    }
+    return result;
+  }
   String _currentSizeId =null;
   String _currentColorId = null;
   int soluongtonkho;
@@ -91,11 +100,68 @@ child: Column(
   mainAxisAlignment: MainAxisAlignment.start,
   crossAxisAlignment: CrossAxisAlignment.start,
   children: <Widget>[
-             Container(
-               width: MediaQuery.of(context).size.width,
-               height: 300,
-               child: Image.network(widget.product.imgUrl!=null?widget.product.imgUrl: "https://cdn.tgdd.vn/comment/34134321/58595582_1405843519557852_4325264661025914880_n-20190424085228.jpg",fit: BoxFit.fill,colorBlendMode: BlendMode.darken,),
-             ),
+    CarouselSlider(
+      height: 300.0,
+      enlargeCenterPage: true,
+      autoPlay: true,
+      reverse: false,
+      autoPlayInterval: Duration(seconds: 4),
+      autoPlayAnimationDuration: Duration(milliseconds: 800),
+      enableInfiniteScroll: true,
+      pauseAutoPlayOnTouch: Duration(seconds: 2),
+      scrollDirection: Axis.horizontal,
+      initialPage: 0,
+      onPageChanged: (index) {
+        setState(() {
+          _current=index;
+        });
+      },
+      items: widget.product.images.map((imgURL){
+        return Builder(
+          builder: (BuildContext context){
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 0),
+              decoration: BoxDecoration(
+                  color: Colors.green
+              ),
+              child: Image.network("https://fashionshopuit-server.azurewebsites.net/image/"+imgURL,fit: BoxFit.fill),
+            );
+          },
+
+        );
+      }).toList(),
+    ),
+    SizedBox(
+      height: 20,
+    ),
+    Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: map<Widget>(widget.product.images,(index,url) {
+          return
+            GestureDetector(
+              child: Container(
+                width: 10.0,
+                height: 10.0,
+                margin: EdgeInsets.symmetric(
+                    horizontal: 2.0, vertical: 10.0),
+                decoration: BoxDecoration(shape: BoxShape.circle,
+                    color: _current == index ? Colors.red : Colors.black12),
+
+              ),
+              onTap: (){
+
+              },
+            );
+        }
+        )
+    ),
+
+//             Container(
+//               width: MediaQuery.of(context).size.width,
+//               height: 300,
+//               child: Image.network(widget.product.imgUrl!=null?"https://fashionshopuit-server.azurewebsites.net/image/"+widget.product.imgUrl: "https://cdn.tgdd.vn/comment/34134321/58595582_1405843519557852_4325264661025914880_n-20190424085228.jpg",fit: BoxFit.fill,colorBlendMode: BlendMode.darken,),
+//             ),
                SizedBox(height: 10,),
                 soluongtonkho!=null?Row(
                   children: <Widget>[

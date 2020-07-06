@@ -51,20 +51,21 @@ class MyApp extends StatelessWidget {
                 900: const Color(0xFF5BBABB),
               }),
           ),
-          home: ChatRoom(MyName: "Admin",)
+          home: BlocProvider<ProductBloc>(
+              create: (context){
+                return ProductBloc(
+
+                )..add(ProductGetMoreDataEvent());
+              },
+              child:Products_Screen(title: "product",)
+          )
+                //ChatRoom(MyName: "Admin",)
           //LoginScreen()
           //ChatRoom(MyName: "Admin",)
 
           //CheckOutScreen()
 
-//          BlocProvider<ProductBloc>(
-//              create: (context){
-//                return ProductBloc(
 //
-//                )..add(ProductGetMoreDataEvent());
-//              },
-//              child:Products_Screen(title: "product",)
-//          )
                 //HomePage()
 
           //LoginScreen()

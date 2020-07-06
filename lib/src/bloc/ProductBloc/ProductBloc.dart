@@ -17,7 +17,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductsState>
 {
   GraphQLClient _client = graphQLConfiguration.clientToQuery();
   List<Product> listdata =[];
-  int currentPage=1;
+  int currentPage=5;
 
 
   @override

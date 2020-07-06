@@ -45,6 +45,22 @@ class FireBaseMethod {
         .snapshots();
   }
 
+  addCart(String email,mapCartItem)
+  {
+    Firestore.instance.collection("Users")
+        .document(email)
+        .collection("Cart")
+        .add(mapCartItem).catchError((e){print(e);});
+  }
+
+  addFavorite (String email,mapFavoriteItem)
+  {
+    Firestore.instance.collection("Users")
+        .document(email)
+        .collection("Favorite")
+        .add(mapFavoriteItem).catchError((e){print(e);});
+  }
+
 
 
 }
