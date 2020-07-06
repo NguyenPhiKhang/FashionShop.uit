@@ -6,6 +6,7 @@ import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
 import 'package:fashionshop/src/model/Category.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:fashionshop/src/resources/Filter_Screen.dart';
+import 'package:fashionshop/src/resources/ProductScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,136 +104,136 @@ controller: _scrollController2,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
 
-                     Container(
-                       decoration: BoxDecoration(color: Colors.white),
-                      height: MediaQuery.of(context).size.height/3+80,
-                      width:MediaQuery.of(context).size.width ,
-                      padding: EdgeInsets.only(top: 10,left: 10),
-                      margin: EdgeInsets.only(top:10,left:0,bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Text("TOP SẢN PHẨM BÁN CHẠY", style: TextStyle(fontSize: 10,color: Colors.black45),),
-                                margin: EdgeInsets.only(top:0,left:0),
-                                height: 20,
-                              ),
-                            ],
-
-                          ),
-
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                  height: MediaQuery.of(context).size.height/3+40,
-                                  width:MediaQuery.of(context).size.width -10,
-
-
-
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: productList.length ,
-                                      itemBuilder:(context,index)
-                                      {
-                                        Product product= productList[index];
-                                        return Padding(
-
-                                          padding: EdgeInsets.only(right: 20),
-                                          child:GestureDetector(
-                                              child: Container(
-                                                decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,border: Border.all(color: Colors.black38,)),
-                                                child:
-                                                ProductCard(product: product,index: index,),
-
-                                              ),
-                                              onTap: (){
-                                                Navigator.push(context,MaterialPageRoute(
-                                                    builder: (context)=> Product_Detail(product: product,index: index)
-                                                )
-                                                );
-                                              }
-
-                                          ),
-
-                                        );
-
-                                      }
-
-                                  )
-
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                    ),
-                  Container(
-                       decoration: BoxDecoration(color: Colors.white),
-                      height: MediaQuery.of(context).size.height/3+80,
-                      width:MediaQuery.of(context).size.width ,
-                      padding: EdgeInsets.only(top: 10,left: 10),
-                      margin: EdgeInsets.only(top:10,left:0,bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                child: Text("TOP SẢN PHẨM MỚI", style: TextStyle(fontSize: 10,color: Colors.black45),),
-                                margin: EdgeInsets.only(top:0,left:0),
-                                height: 20,
-                              ),
-                            ],
-
-                          ),
-
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                  height: MediaQuery.of(context).size.height/3+40,
-                                  width:MediaQuery.of(context).size.width -10,
-
-
-
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: productList.length ,
-                                      itemBuilder:(context,index)
-                                      {
-                                        Product product= productList[index];
-                                        return Padding(
-
-                                          padding: EdgeInsets.only(right: 20),
-                                          child:GestureDetector(
-                                              child: Container(
-                                                decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,border: Border.all(color: Colors.black38,)),
-                                                child:
-                                                ProductCard(product: product,index: index,),
-
-                                              ),
-                                              onTap: (){
-                                                Navigator.push(context,MaterialPageRoute(
-                                                    builder: (context)=> Product_Detail(product: product,index: index)
-                                                )
-                                                );
-                                              }
-
-                                          ),
-
-                                        );
-
-                                      }
-
-                                  )
-
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                    ),
+//                     Container(
+//                       decoration: BoxDecoration(color: Colors.white),
+//                      height: MediaQuery.of(context).size.height/3+80,
+//                      width:MediaQuery.of(context).size.width ,
+//                      padding: EdgeInsets.only(top: 10,left: 10),
+//                      margin: EdgeInsets.only(top:10,left:0,bottom: 10),
+//                      child: Column(
+//                        children: <Widget>[
+//                          Row(
+//                            children: <Widget>[
+//                              Container(
+//                                child: Text("TOP SẢN PHẨM BÁN CHẠY", style: TextStyle(fontSize: 10,color: Colors.black45),),
+//                                margin: EdgeInsets.only(top:0,left:0),
+//                                height: 20,
+//                              ),
+//                            ],
+//
+//                          ),
+//
+//                          Row(
+//                            children: <Widget>[
+//                              Container(
+//                                  height: MediaQuery.of(context).size.height/3+40,
+//                                  width:MediaQuery.of(context).size.width -10,
+//
+//
+//
+//                                  child: ListView.builder(
+//                                      scrollDirection: Axis.horizontal,
+//                                      itemCount: productList.length ,
+//                                      itemBuilder:(context,index)
+//                                      {
+//                                        Product product= productList[index];
+//                                        return Padding(
+//
+//                                          padding: EdgeInsets.only(right: 20),
+//                                          child:GestureDetector(
+//                                              child: Container(
+//                                                decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,border: Border.all(color: Colors.black38,)),
+//                                                child:
+//                                                ProductCard(product: product,index: index,),
+//
+//                                              ),
+//                                              onTap: (){
+//                                                Navigator.push(context,MaterialPageRoute(
+//                                                    builder: (context)=> Product_Detail(product: product,index: index)
+//                                                )
+//                                                );
+//                                              }
+//
+//                                          ),
+//
+//                                        );
+//
+//                                      }
+//
+//                                  )
+//
+//                              ),
+//                            ],
+//                          ),
+//                        ],
+//                      ),
+//
+//                    ),
+//                  Container(
+//                       decoration: BoxDecoration(color: Colors.white),
+//                      height: MediaQuery.of(context).size.height/3+80,
+//                      width:MediaQuery.of(context).size.width ,
+//                      padding: EdgeInsets.only(top: 10,left: 10),
+//                      margin: EdgeInsets.only(top:10,left:0,bottom: 10),
+//                      child: Column(
+//                        children: <Widget>[
+//                          Row(
+//                            children: <Widget>[
+//                              Container(
+//                                child: Text("TOP SẢN PHẨM MỚI", style: TextStyle(fontSize: 10,color: Colors.black45),),
+//                                margin: EdgeInsets.only(top:0,left:0),
+//                                height: 20,
+//                              ),
+//                            ],
+//
+//                          ),
+//
+//                          Row(
+//                            children: <Widget>[
+//                              Container(
+//                                  height: MediaQuery.of(context).size.height/3+40,
+//                                  width:MediaQuery.of(context).size.width -10,
+//
+//
+//
+//                                  child: ListView.builder(
+//                                      scrollDirection: Axis.horizontal,
+//                                      itemCount: productList.length ,
+//                                      itemBuilder:(context,index)
+//                                      {
+//                                        Product product= productList[index];
+//                                        return Padding(
+//
+//                                          padding: EdgeInsets.only(right: 20),
+//                                          child:GestureDetector(
+//                                              child: Container(
+//                                                decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,border: Border.all(color: Colors.black38,)),
+//                                                child:
+//                                                ProductCard(product: product,index: index,),
+//
+//                                              ),
+//                                              onTap: (){
+//                                                Navigator.push(context,MaterialPageRoute(
+//                                                    builder: (context)=> Product_Detail(product: product,index: index)
+//                                                )
+//                                                );
+//                                              }
+//
+//                                          ),
+//
+//                                        );
+//
+//                                      }
+//
+//                                  )
+//
+//                              ),
+//                            ],
+//                          ),
+//                        ],
+//                      ),
+//
+//                    ),
                   ///Danh Mục Catelv3 With Icon
                   Container(
                     decoration: BoxDecoration(color: Colors.white),
@@ -261,15 +262,8 @@ controller: _scrollController2,
 
 
 
-                                child: GridView.builder(
-
-                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: (MediaQuery.of(context).size.height/4)/(MediaQuery.of(context).size.width/5+20),
-                                        crossAxisCount: 2
-                                    ),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: widget.categoryLevel2.listSub_cat.length,
-
+                                child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
                                     itemBuilder:(context,index)
                                     {
                                       CategoryLevel3 category= widget.categoryLevel2.listSub_cat[index];
@@ -283,17 +277,25 @@ controller: _scrollController2,
 
                                             ),
                                             onTap: (){
-//                                              Navigator.push(context,MaterialPageRoute(
-//                                                  builder: (context)=> Product_Detail(product: product,index: index)
-//                                              )
-//                                              );
+                                              Navigator.push(context,MaterialPageRoute(
+                                                  builder: (context)=> BlocProvider<ProductBloc>(
+                                                      create: (context){
+                                                        return ProductBloc(
+
+                                                        )..add(ProductByCategoryCodeEvent(category_code: category.level_code));
+                                                      },
+                                                      child: Products_Screen(title: "Products of " +category.name,level_code: category.level_code,)
+                                                  )
+                                              )
+                                              );
                                             }
 
                                         ),
 
                                       );
 
-                                    }
+                                    },
+                                  itemCount:widget.categoryLevel2.listSub_cat.length ,
 
                                 )
 
@@ -410,8 +412,10 @@ controller: _scrollController2,
 
                                       ),
                                       onTap: (){
-
-
+                                 Navigator.push(context,MaterialPageRoute(
+                                          builder: (context)=> Product_Detail(product: state.data[index],index: index,)
+                                      )
+                                      );
                                       }
 
                                   ),

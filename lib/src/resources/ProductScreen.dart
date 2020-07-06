@@ -10,7 +10,8 @@ import 'Product_Detail.dart';
 
 class Products_Screen extends StatefulWidget {
   final String title;
-  Products_Screen({@required this.title});
+  final int level_code;
+  Products_Screen({@required this.title,@required this.level_code});
   @override
   _Products_ScreenState createState() => _Products_ScreenState();
 }
@@ -24,7 +25,7 @@ class _Products_ScreenState extends State<Products_Screen> {
     super.initState();
     _scrollController.addListener(() {
       if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
-        context.bloc<ProductBloc>().add(ProductGetMoreDataEvent());
+        context.bloc<ProductBloc>().add(ProductByCategoryCodeEvent(category_code: widget.level_code));
 
     });
 
@@ -42,7 +43,7 @@ class _Products_ScreenState extends State<Products_Screen> {
                    onTap: () {
                      Navigator.pop(context);
                    },
-                   child: Icon(Icons.arrow_back, color: Colors.blue, size: 30,),
+                   child: Icon(Icons.arrow_back, color: Colors.white, size: 30,),
                  ),
 
                  actions: <Widget>[

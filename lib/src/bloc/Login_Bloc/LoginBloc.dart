@@ -13,7 +13,8 @@ import 'LoginState.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-
+String name;
+String get getName => name;
 
 String token;
 String get getToken => token;
@@ -40,6 +41,7 @@ String get getToken => token;
           // if đúng thì yeild LoginOk else failure
               if(!result.hasException)
                 { token = result.data['login']['token'];
+                 name =result.data['login']['account']['person']['name'];
 yield LoginOk();
                 }
               else {

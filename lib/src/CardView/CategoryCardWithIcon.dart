@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class CategoryCardWithIcon extends StatelessWidget {
   final CategoryLevel3 categoryLevel3;
 
-  const CategoryCardWithIcon({this.categoryLevel3});
+  const CategoryCardWithIcon({this.categoryLevel3,});
 
   @override
   Widget build(BuildContext context) {

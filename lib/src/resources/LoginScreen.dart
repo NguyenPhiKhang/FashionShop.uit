@@ -41,14 +41,9 @@ class LoginScreenState extends State<LoginScreen> {
               });
             }
             if (state is LoginOk) {
-              return BlocProvider<ProductBloc>(
-                  create: (context){
-                    return ProductBloc(
 
-                    );
-                  },
-                  child:Products_Screen(title: "product",)     //HomePage();
-              );
+              return HomeScreen(Myname: context.bloc<LoginBloc>().getName);
+
             }
             if(state is LoginLoading) {
               return Scaffold(

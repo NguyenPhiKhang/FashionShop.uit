@@ -2,6 +2,7 @@
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryBloc.dart';
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryState.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
+import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/model/Category.dart';
 import 'package:fashionshop/src/resources/ProductWithCatLv3_Screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,7 +56,7 @@ class Explore_TabPage extends StatelessWidget {
                 create: (context){
                   return ProductBloc(
 
-                  );
+                  )..add(ProductGetMoreDataEvent());
                 },
                    child: ProductWithCatLv3_Screen(title: categoryLevel1.listSub_cat[i].name,categoryLevel2: categoryLevel1.listSub_cat[i],)
                 )
@@ -197,8 +198,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
             ),
             body: Container(
               decoration: BoxDecoration(
-                  color: Colors.black,
-                  backgroundBlendMode: BlendMode.colorBurn),
+                  color: Color(0xffB98959),
+                  ),
               child: TabBarView(
                 children:
                 context.bloc<CategoryBloc>().list_cat_1.map<Widget>(( value) {

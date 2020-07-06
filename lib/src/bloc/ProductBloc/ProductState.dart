@@ -36,6 +36,7 @@ abstract class ProductsState extends Equatable {
   bool get stringify => true;
 }
 
+
 class ProductsGridViewState extends ProductsState {
   ProductsGridViewState({
     List<Product> data,
@@ -87,6 +88,36 @@ class ProductsAddmoreState extends ProductsState {
     String error,
   }) {
     return ProductsAddmoreState(
+      data: data ?? this.data,
+      filterRules: filterRules ?? this.filterRules,
+      sortBy: sortBy ?? this.sortBy,
+      error: error,
+    );
+  }
+}
+
+class Loading extends ProductsState {
+  Loading({
+    List<Product> data,
+    String sortBy,
+    List<String> filterRules,
+    String error,
+  }) : super(
+      data: data, sortBy: sortBy, filterRules: filterRules, error: error);
+
+  Loading getTiles() {
+    return Loading(
+        data: data, sortBy: sortBy, filterRules: filterRules);
+  }
+
+  @override
+  Loading copyWith({
+    List<Product> data,
+    String sortBy,
+    List<String> filterRules,
+    String error,
+  }) {
+    return Loading(
       data: data ?? this.data,
       filterRules: filterRules ?? this.filterRules,
       sortBy: sortBy ?? this.sortBy,

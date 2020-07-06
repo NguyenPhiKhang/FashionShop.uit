@@ -4,6 +4,11 @@ String Login = '''
            {
               
               token
+              account{
+                person{
+                  name
+                }
+              }
            }
         }
    ''';
@@ -19,27 +24,71 @@ String Register = '''
 
 
 String GetAllCategories = '''
-        query {
+      query {
   getAllCategory(level: 1)
   {
     name
     
     subCat{
       name
+      category_code
       image
       subCat{
+        category_code
         name
         icon
       }
     }
   }
 }
+
 ''';
 
 String getProduct = '''
-query getProduct(\$PageNumber:Int!)
+query getProduct(\$pageNumber:Int!,\$product_ids: [ID])
   {
-  getProduct(pageNumber: \$PageNumber)
+  getProduct(pageNumber: \$pageNumber,product_ids:\$product_ids )
+  {
+    name
+    img_url
+    images
+    price
+    promotion_percent
+    final_price
+    description
+    rating_star{
+      star1
+    }
+    stock_status
+    is_freeship
+    attribute{
+      attribute{
+        name
+        
+      }
+      value{
+    _id
+    name
+    }
+    				}
+    
+		
+		option_amount{
+			option_size
+      option_color
+			amount
+		}
+    
+    record_status
+  }
+}
+''';
+
+
+String getProductByCategory = ''' 
+query GetProductByCategory(\$level_code: Int!,\$pageNumber: Int!,\$colors: [ID],\$sizes: [ID],\$price_min:Float!,\$price_max: Float!)
+  {
+  getProductByCategory(level_code: \$level_code,pageNumber: \$pageNumber,colors: \$colors,sizes: \$sizes,price_min: \$price_min,price_max: \$price_max)
   {
     name
     img_url

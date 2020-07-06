@@ -9,7 +9,9 @@ import 'package:fashionshop/src/resources/CheckOut_Screen.dart';
 
 import 'package:fashionshop/src/resources/Conversation_Screen.dart';
 import 'package:fashionshop/src/resources/ExploreScreen.dart';
+import 'package:fashionshop/src/resources/Filter_Screen.dart';
 import 'package:fashionshop/src/resources/HomePage.dart';
+import 'package:fashionshop/src/resources/HomeScreen.dart';
 import 'package:fashionshop/src/resources/LoginScreen.dart';
 import 'package:fashionshop/src/resources/Order_Screen.dart';
 import 'package:fashionshop/src/resources/ProductScreen.dart';
@@ -51,14 +53,23 @@ class MyApp extends StatelessWidget {
                 900: const Color(0xFF5BBABB),
               }),
           ),
-          home: BlocProvider<ProductBloc>(
-              create: (context){
-                return ProductBloc(
-
-                )..add(ProductGetMoreDataEvent());
-              },
-              child:Products_Screen(title: "product",)
-          )
+          home:   LoginScreen()
+//          BlocProvider<CategoryBloc>(
+//                  create: (context){
+//            return CategoryBloc(
+//
+//            )..add(InitiateEvent());
+//            },
+//                child:ExploreScreen()
+//            )
+//          BlocProvider<ProductBloc>(
+//              create: (context){
+//                return ProductBloc(
+//
+//                )..add(ProductGetMoreDataEvent());
+//              },
+//              child:Products_Screen(title: "product",)
+//          )
                 //ChatRoom(MyName: "Admin",)
           //LoginScreen()
           //ChatRoom(MyName: "Admin",)
@@ -69,14 +80,8 @@ class MyApp extends StatelessWidget {
                 //HomePage()
 
           //LoginScreen()
-//          BlocProvider<CategoryBloc>(
-//                  create: (context){
-//            return CategoryBloc(
-//
-//            )..add(InitiateEvent());
-//            },
-//                child:ExploreScreen()     //HomePage();
-//            )  //LoginScreen(),
+
+// LoginScreen(),
         ),
             )));
   }

@@ -15,14 +15,15 @@ CategoryLevel1(String Name,List<CategoryLevel2> list)
 class CategoryLevel2{
   String imgUrl;
   String name;
-
+   int level_code;
   List<CategoryLevel3> listSub_cat;
 
-  CategoryLevel2(String Img,String Name, List<CategoryLevel3> list)
+  CategoryLevel2(String Img,String Name,int Level_code, List<CategoryLevel3> list,)
   {
 
     imgUrl =Img;
     name = Name;
+    level_code=Level_code;
     listSub_cat =list;
   }
 }
@@ -33,11 +34,13 @@ class CategoryLevel3{
   String IconUrl;
 
   String name;
-  CategoryLevel3(String Icon,String Name)
+  int level_code;
+  CategoryLevel3(String Icon,String Name,int Level_code)
   {
     IconUrl = Icon;
 
     name = Name;
+    level_code = Level_code;
 
   }
 }

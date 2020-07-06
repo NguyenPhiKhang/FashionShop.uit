@@ -100,37 +100,42 @@ child: Column(
   mainAxisAlignment: MainAxisAlignment.start,
   crossAxisAlignment: CrossAxisAlignment.start,
   children: <Widget>[
-    CarouselSlider(
-      height: 300.0,
-      enlargeCenterPage: true,
-      autoPlay: true,
-      reverse: false,
-      autoPlayInterval: Duration(seconds: 4),
-      autoPlayAnimationDuration: Duration(milliseconds: 800),
-      enableInfiniteScroll: true,
-      pauseAutoPlayOnTouch: Duration(seconds: 2),
-      scrollDirection: Axis.horizontal,
-      initialPage: 0,
-      onPageChanged: (index) {
-        setState(() {
-          _current=index;
-        });
-      },
-      items: widget.product.images.map((imgURL){
-        return Builder(
-          builder: (BuildContext context){
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 0),
-              decoration: BoxDecoration(
-                  color: Colors.green
-              ),
-              child: Image.network("https://fashionshopuit-server.azurewebsites.net/image/"+imgURL,fit: BoxFit.fill),
-            );
-          },
+    Container(
+      color: Colors.white,
+      child: CarouselSlider(
 
-        );
-      }).toList(),
+        height: 300.0,
+        enlargeCenterPage: true,
+        autoPlay: true,
+        reverse: false,
+        autoPlayInterval: Duration(seconds: 4),
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        enableInfiniteScroll: true,
+        pauseAutoPlayOnTouch: Duration(seconds: 2),
+        scrollDirection: Axis.horizontal,
+        initialPage: 0,
+        onPageChanged: (index) {
+          setState(() {
+            _current=index;
+          });
+        },
+        items: widget.product.images.map((imgURL){
+          return Builder(
+            builder: (BuildContext context){
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(left: 10),
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                  border: Border.all(color: Colors.black)
+                ),
+                child: Image.network("https://fashionshopuit-server.azurewebsites.net/image/"+imgURL,fit: BoxFit.fill),
+              );
+            },
+
+          );
+        }).toList(),
+      ),
     ),
     SizedBox(
       height: 20,
@@ -308,37 +313,35 @@ child: Column(
                    ),
                  ],
                ),
-//              AnimatedCrossFade(firstChild: Text(widget.product.description,
-//              maxLines: 2,style: TextStyle(fontSize: 20,color: Colors.black),),
-//                secondChild: Text(widget.product.description,
-//                  style: TextStyle(fontSize: 20,color: Colors.black),),
-//                crossFadeState: isExpanded?CrossFadeState.showSecond : CrossFadeState.showFirst,
-//                duration: kThemeAnimationDuration,
-//                ),
-//              GestureDetector(
-//                child: Text(isExpanded? "Less" : "More...",style: TextStyle(fontSize: 15,color: Colors.red,fontWeight: FontWeight.bold),),
-//                onTap: (){
-//                  setState(() {
-//                    isExpanded ? isExpanded=false : isExpanded =true;
-//                  });
-//                },
+              AnimatedCrossFade(firstChild: Text(widget.product.description,
+              maxLines: 2,style: TextStyle(fontSize: 14,color: Colors.black),),
+                secondChild: Text(widget.product.description,
+                  style: TextStyle(fontSize: 14,color: Colors.black),),
+                crossFadeState: isExpanded?CrossFadeState.showSecond : CrossFadeState.showFirst,
+                duration: kThemeAnimationDuration,
+                ),
+              GestureDetector(
+                child: Text(isExpanded? "Less" : "More...",style: TextStyle(fontSize: 15,color: Colors.red,fontWeight: FontWeight.bold),),
+                onTap: (){
+                  setState(() {
+                    isExpanded ? isExpanded=false : isExpanded =true;
+                  });
+                },
 //
-//              ),
-               ExpansionTile(
-
-                 title: Container( alignment: Alignment.center,
-                   width: MediaQuery.of(context).size.width,
-                     child: Text("Description",textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontWeight:  FontWeight.w500,fontSize: 16),),
-                     color: Colors.black
-                   ,
-                 ),
-                 children: <Widget>[
-                     Html(
-                       data: widget.product.description
-
-                     ),
-                 ],
-               )
+              ),
+//               ExpansionTile(
+//
+//                 title: Container( alignment: Alignment.center,
+//                   width: MediaQuery.of(context).size.width,
+//                     child: Text("Description",textAlign: TextAlign.left,style: TextStyle(color: Colors.white,fontWeight:  FontWeight.w500,fontSize: 16),),
+//                     color: Colors.black
+//                   ,
+//                 ),
+//                 children: <Widget>[
+//                     Text(widget.product.description,style: TextStyle(fontSize: 14,color: Colors.black),textAlign: TextAlign.left,
+//                     ),
+//                 ],
+//               )
 
             ],
           ),
