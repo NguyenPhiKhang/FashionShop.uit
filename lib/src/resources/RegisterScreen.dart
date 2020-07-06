@@ -1,3 +1,4 @@
+import 'package:fashionshop/src/FirebaseMethod/FirebaseMethod.dart';
 import 'package:fashionshop/src/bloc/RegisterBloc/RegisterBloc.dart';
 import 'package:fashionshop/src/bloc/RegisterBloc/RegisterEvent.dart';
 import 'package:fashionshop/src/bloc/RegisterBloc/RegisterState.dart';
@@ -14,7 +15,9 @@ class RegisterScreen extends StatefulWidget {
 class RegisterScreenState extends State<RegisterScreen> {
   TextEditingController txt_email = TextEditingController();
   TextEditingController txt_password = TextEditingController();
+  TextEditingController txt_passwordConfirm = TextEditingController();
   TextEditingController txt_name = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -150,7 +153,6 @@ class RegisterScreenState extends State<RegisterScreen> {
                           if(value.length <6)
                             return 'Mật khẩu phải từ 6 kí tự trở lên.';
 
-
                           return null;
                         },
                         onChanged: (value)
@@ -174,11 +176,13 @@ class RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       Padding(
+
                           padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                           child: TextFormField(
+                            controller: txt_passwordConfirm,
                               validator: (value) {
 
-                                if(txt_password.text!=value)
+                                if(txt_passwordConfirm.text!=txt_password.text)
                                   return 'Xác nhận mật khẩu không đúng.';
                                 return null;
                               },
@@ -189,7 +193,6 @@ class RegisterScreenState extends State<RegisterScreen> {
 
                             style: TextStyle(fontSize: 18, color: Colors.black),
                             obscureText: true,
-
                             autocorrect: false,
                             decoration: InputDecoration(
                               labelText: "Nhập lại mật khẩu",
@@ -213,7 +216,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                           child: RaisedButton(
                             onPressed: () {
                               if(_formKey.currentState.validate())
-                              context.bloc<RegisterBloc>().add(RegisterButtonPressed(username:txt_email.text , password: txt_password.text, idPermission:"5eee3d622c331a381bdc6b04"));
+                              context.bloc<RegisterBloc>().add(RegisterButtonPressed(name:txt_name.text ,username:txt_email.text , password: txt_password.text, idPermission:"5eee3d622c331a381bdc6b04"));
                             },
                             child: Text(
                               "Đăng ký",

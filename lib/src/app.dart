@@ -4,7 +4,10 @@ import 'package:fashionshop/src/bloc/CategoryBloc/CategoryState.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
+import 'package:fashionshop/src/resources/ChatRoom.dart';
 import 'package:fashionshop/src/resources/CheckOut_Screen.dart';
+
+import 'package:fashionshop/src/resources/Conversation_Screen.dart';
 import 'package:fashionshop/src/resources/ExploreScreen.dart';
 import 'package:fashionshop/src/resources/HomePage.dart';
 import 'package:fashionshop/src/resources/LoginScreen.dart';
@@ -48,7 +51,11 @@ class MyApp extends StatelessWidget {
                 900: const Color(0xFF5BBABB),
               }),
           ),
-          home:  CheckOutScreen()
+          home: ChatRoom(MyName: "Admin",)
+          //LoginScreen()
+          //ChatRoom(MyName: "Admin",)
+
+          //CheckOutScreen()
 
 //          BlocProvider<ProductBloc>(
 //              create: (context){

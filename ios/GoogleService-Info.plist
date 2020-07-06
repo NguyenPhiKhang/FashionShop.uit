@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>387631960846-5i838p43415la1l0mfblj5m5imgh30gu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.387631960846-5i838p43415la1l0mfblj5m5imgh30gu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBnM0Tf9F6sFoB32O_v_x0dYTMV55e0GsQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>387631960846</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.khangkhang.fashionshop</string>
+	<key>PROJECT_ID</key>
+	<string>e-commerce-app-d1938</string>
+	<key>STORAGE_BUCKET</key>
+	<string>e-commerce-app-d1938.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:387631960846:ios:943b12c20cc807d6503d5f</string>
+	<key>DATABASE_URL</key>
+	<string>https://e-commerce-app-d1938.firebaseio.com</string>
+</dict>
+</plist>
