@@ -81,14 +81,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductsState>
                 List<OptionAmount> list_optionAmount =[];
                  for(int j=0;j<listdata_optionAmount.length;j++)
                    {
-                     list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
+                     list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
                    }
 
 
 
 
 
-                 listdata.add(new Product(list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"],  list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
+                 listdata.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"],  list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
                }
                currentPage++;
 
@@ -148,14 +148,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductsState>
                  List<OptionAmount> list_optionAmount =[];
                  for(int j=0;j<listdata_optionAmount.length;j++)
                  {
-                   list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
+                   list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
                  }
 
 
 
 
 
-                 listdataByCategory.add(new Product(list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"],  list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
+                 listdataByCategory.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"],  list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
                }
                currentPageByCateGory++;
                if(state is ProductsGridViewState)

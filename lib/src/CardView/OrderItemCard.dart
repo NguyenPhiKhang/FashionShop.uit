@@ -17,7 +17,7 @@ class OrderItemCard extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Container(
-            child: Image.network(orderItem.product.imgUrl,fit: BoxFit.fill,),
+            child: Image.network("https://fashionshopuit-server.azurewebsites.net/image/"+orderItem.productImgURL,fit: BoxFit.fill,),
             width: MediaQuery.of(context).size.width/3,
             height: MediaQuery.of(context).size.height/6+10,
           ),
@@ -31,7 +31,7 @@ class OrderItemCard extends StatelessWidget {
 
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                      Text(orderItem.product.name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
+                      Text(orderItem.productName,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
                       Icon(Icons.more_vert, size: 20,color: Colors.black45,)
                   ],
                 ),
@@ -74,7 +74,7 @@ class OrderItemCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text("\u0024"+(orderItem.count*orderItem.product.price).toString(),style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.end,),
+                    Text("\u0024"+(orderItem.count*orderItem.productPrice).toString(),style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.w500),textAlign: TextAlign.end,),
                   ],
                 )
 

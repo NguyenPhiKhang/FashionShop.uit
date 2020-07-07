@@ -40,8 +40,10 @@ Widget chatRoomList (){
   @override
   void initState() {
     FireBaseMethod().getChatRoom(widget.MyName).then((value)
-    {
-         chatRoomsStream=value;
+    { setState(() {
+      chatRoomsStream=value;
+    });
+
     });
     super.initState();
   }
@@ -87,6 +89,7 @@ final String chatRoomId;
         ));
       },
       child: Container(
+        height: MediaQuery.of(context).size.height,
         margin: EdgeInsets.symmetric(horizontal: 24,vertical: 10),
         child: Row(
           children: <Widget>[

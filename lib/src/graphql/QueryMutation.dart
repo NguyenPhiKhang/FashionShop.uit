@@ -49,6 +49,7 @@ query getProduct(\$pageNumber:Int!,\$product_ids: [ID])
   {
   getProduct(pageNumber: \$pageNumber,product_ids:\$product_ids )
   {
+    _id
     name
     img_url
     images
@@ -74,6 +75,7 @@ query getProduct(\$pageNumber:Int!,\$product_ids: [ID])
     
 		
 		option_amount{
+		  _id
 			option_size
       option_color
 			amount
@@ -90,6 +92,7 @@ query GetProductByCategory(\$level_code: Int!,\$pageNumber: Int!,\$colors: [ID],
   {
   getProductByCategory(level_code: \$level_code,pageNumber: \$pageNumber,colors: \$colors,sizes: \$sizes,price_min: \$price_min,price_max: \$price_max)
   {
+    _id
     name
     img_url
     images
@@ -115,12 +118,39 @@ query GetProductByCategory(\$level_code: Int!,\$pageNumber: Int!,\$colors: [ID],
     
 		
 		option_amount{
+		  _id
 			option_size
       option_color
 			amount
 		}
     
     record_status
+  }
+}
+''';
+
+String getCartItem = '''
+query renderCart(\$cartInput: [CartInput]!)
+{
+  
+  renderCart(cartInput: \$cartInput)
+  {
+    product{
+      name
+      img_url
+      price
+    }
+    option_amount{
+      option_size{
+        name
+        
+      }
+      option_color{
+        name
+      }
+    }
+    amount
+    
   }
 }
 ''';

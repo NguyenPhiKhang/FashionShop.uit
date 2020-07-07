@@ -1,17 +1,22 @@
 
-import 'package:fashionshop/src/bloc/CategoryBloc/CategoryBloc.dart';
+
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryEvent.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
+
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
+import 'package:fashionshop/src/graphql/QueryMutation.dart';
+import 'package:fashionshop/src/model/Category.dart';
+
 import 'package:fashionshop/src/resources/ChatRoom.dart';
 import 'package:fashionshop/src/resources/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
+import 'Cart_Screen.dart';
 import 'ProductScreen.dart';
-
 
 
 
@@ -27,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
  int currentIndex =0;
 
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
   @override
 
   Widget build(BuildContext context) {
@@ -41,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child:HomePage()
       )
       ,
-      Center(child: Text("Your Cart"),),
+      CartScreen(email: context.bloc<LoginBloc>().getEmail),
       ChatRoom(MyName: widget.Myname),
       Center(child: Text("Your Favorite"),),
       Center(child: Text("Your Profile"),),

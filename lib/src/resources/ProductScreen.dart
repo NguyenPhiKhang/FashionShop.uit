@@ -1,4 +1,5 @@
 import 'package:fashionshop/src/CardView/ProductCard.dart';
+import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
@@ -159,7 +160,7 @@ class _Products_ScreenState extends State<Products_Screen> {
                                        ),
                                        onTap: (){
                                          Navigator.push(context,MaterialPageRoute(
-                                             builder: (context)=> Product_Detail(product: state.data[index],index: index,)
+                                             builder: (context)=> Product_Detail(product: state.data[index],index: index,email: context.bloc<LoginBloc>().getEmail,)
                                          )
                                          );
 

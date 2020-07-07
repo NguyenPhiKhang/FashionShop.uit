@@ -28,7 +28,7 @@ import 'package:fashionshop/src/model/Category.dart';
 
 
 class Product
-{
+{ String id;
   String name;
   String imgUrl;
   List<String> images;
@@ -44,8 +44,10 @@ class Product
 
   bool record_status;
 
-  Product(String Name,String ImgUrl,List<String> Images,String Des,int Price,int Promotion_percent,int Final_price,double Rating,bool Stock_status,bool Is_freeship,List<Attribute> List_Attribute,List<OptionAmount> list_OptionAmount, bool Record_status)
-  {  name = Name;
+  Product(String Id,String Name,String ImgUrl,List<String> Images,String Des,int Price,int Promotion_percent,int Final_price,double Rating,bool Stock_status,bool Is_freeship,List<Attribute> List_Attribute,List<OptionAmount> list_OptionAmount, bool Record_status)
+  {
+    id =Id;
+    name = Name;
     imgUrl =ImgUrl;
     images = Images;
   description=Des;
@@ -88,12 +90,13 @@ class AttributeValue {
 
 class OptionAmount
 {
+  String id;
   String option_size;
   String option_color;
   int amount;
 
-  OptionAmount(String Option_size,String Option_color,int Amount)
-  {
+  OptionAmount(String Id,String Option_size,String Option_color,int Amount)
+  { id =Id;
     option_size= Option_size;
     option_color =Option_color;
     amount = Amount;

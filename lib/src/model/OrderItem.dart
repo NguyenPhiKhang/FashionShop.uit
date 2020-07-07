@@ -2,14 +2,18 @@ import 'Product.dart';
 
 class OrderItem
 {
-  Product product;
+  String productName;
+  String productImgURL;
+  int productPrice;
   int count;
   String Size;
   String Color;
 
-  OrderItem(Product pro,int c,String size,String color)
+  OrderItem(String n,String imgURL,int Price,int c,String size,String color)
   {
-    product= pro;
+    productName =n;
+    productImgURL=imgURL;
+    productPrice=Price;
     count =c;
     Size = size;
     Color = color;

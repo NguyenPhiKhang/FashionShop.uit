@@ -4,8 +4,11 @@ import 'package:fashionshop/src/bloc/CategoryBloc/CategoryState.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
+
+import 'package:fashionshop/src/resources/Cart_Screen.dart';
 import 'package:fashionshop/src/resources/ChatRoom.dart';
 import 'package:fashionshop/src/resources/CheckOut_Screen.dart';
+
 
 import 'package:fashionshop/src/resources/Conversation_Screen.dart';
 import 'package:fashionshop/src/resources/ExploreScreen.dart';
@@ -13,7 +16,7 @@ import 'package:fashionshop/src/resources/Filter_Screen.dart';
 import 'package:fashionshop/src/resources/HomePage.dart';
 import 'package:fashionshop/src/resources/HomeScreen.dart';
 import 'package:fashionshop/src/resources/LoginScreen.dart';
-import 'package:fashionshop/src/resources/Order_Screen.dart';
+
 import 'package:fashionshop/src/resources/ProductScreen.dart';
 import 'package:fashionshop/src/resources/ProductWithCatLv3_Screen.dart';
 import 'package:fashionshop/src/resources/RegisterScreen.dart';

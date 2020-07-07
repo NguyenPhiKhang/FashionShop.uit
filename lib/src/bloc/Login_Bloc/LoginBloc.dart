@@ -15,7 +15,8 @@ GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
 String name;
 String get getName => name;
-
+String email;
+String get getEmail =>email;
 String token;
 String get getToken => token;
   GraphQLClient _client = graphQLConfiguration.clientToQuery();
@@ -42,6 +43,7 @@ String get getToken => token;
               if(!result.hasException)
                 { token = result.data['login']['token'];
                  name =result.data['login']['account']['person']['name'];
+                 email=event.username;
 yield LoginOk();
                 }
               else {

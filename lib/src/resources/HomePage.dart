@@ -1,9 +1,12 @@
 import 'package:fashionshop/src/CardView/ProductCard.dart';
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryBloc.dart';
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryEvent.dart';
+import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
+import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
+import 'package:fashionshop/src/graphql/QueryMutation.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:fashionshop/src/resources/ExploreScreen.dart';
 import 'package:fashionshop/src/resources/Filter_Screen.dart';
@@ -12,8 +15,53 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fashionshop/src/model/Category.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'Product_Detail.dart';
-
+//GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+//List<CategoryLevel1> list_cat_1 =[];
+//void LoadCategory ()async{
+//
+//  GraphQLClient _client = graphQLConfiguration.clientToQuery();
+//  QueryResult result = await _client.query(
+//      QueryOptions(
+//        documentNode: gql(GetAllCategories),
+//      )
+//  );
+//  List<LazyCacheMap> listdata_level1 =
+//  (result.data["getAllCategory"] as List<dynamic>).cast<LazyCacheMap>();
+////           print(listdata_level1[0].length);
+////        List<LazyCacheMap> listdata_level2 =
+////          (listdata_level1[0]["subCat"] as List<dynamic>).cast<LazyCacheMap>();
+////        print(listdata_level2.length);
+////        List<LazyCacheMap> listdata_level3 =
+////                (listdata_level2[0]["subCat"] as List<dynamic>).cast<LazyCacheMap>();
+////            print(listdata_level3.length);
+////        List<CategoryLevel3> list_cat_3 =[];
+////        list_cat_3.add(new CategoryLevel3("a", listdata_level3[0]["icon"]));
+//
+//
+//
+//  for(int i =0;i < listdata_level1.length;i++)
+//  {
+//    List<LazyCacheMap> listdata_level2 =
+//    (listdata_level1[i]["subCat"] as List<dynamic>).cast<LazyCacheMap>();
+//    List<CategoryLevel2> list_cat_2=[];
+//    for(int j=0;j< listdata_level2.length;j++)
+//    {
+//      List<LazyCacheMap> listdata_level3 =
+//      (listdata_level2[j]["subCat"] as List<dynamic>).cast<LazyCacheMap>();
+//      List<CategoryLevel3> list_cat_3 =[];
+//      for(int k=0;k<listdata_level3.length;k++)
+//      {
+//        list_cat_3.add(new CategoryLevel3(listdata_level3[k]["icon"], listdata_level3[k]["name"],listdata_level3[k]["category_code"]));
+//      }
+//      list_cat_2.add(new CategoryLevel2(listdata_level2[j]["icon"], listdata_level2[j]["name"],listdata_level2[j]["category_code"] ,list_cat_3));
+//
+//    }
+//
+//    list_cat_1.add(new CategoryLevel1(listdata_level1[i]["name"], list_cat_2));
+//  }
+//}
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -55,10 +103,13 @@ class _HomePageState extends State<HomePage> {
   ScrollController _scrollController= ScrollController();
   ScrollController _scrollController2= ScrollController();
  bool flag =true;
+
   @override
   void initState()
   {
     super.initState();
+    //LoadCategory();
+
     _scrollController2.addListener(() {
       if(_scrollController2.position.pixels==_scrollController2.position.maxScrollExtent)
         setState(() {
@@ -223,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                 /// ListView Category
 
                       /// GridView  of List categorylevel2
-                      //                      Row(
+//                                            Row(
 //                        children: <Widget>[
 //                          Container(
 //                            child: Text("Danh mục", style: TextStyle(fontSize: 10,color: Colors.black45),),
@@ -249,11 +300,11 @@ class _HomePageState extends State<HomePage> {
 //                                      crossAxisCount: 2
 //                                  ),
 //                                  scrollDirection: Axis.horizontal,
-//                                  itemCount: context.bloc<CategoryBloc>().list_cat_1[0].listSub_cat.length,
+//                                  itemCount: list_cat_1[0].listSub_cat.length,
 //
 //                                  itemBuilder:(context,index)
 //                                  {
-//                                    CategoryLevel2 category= context.bloc<CategoryBloc>().list_cat_1[0].listSub_cat[index];
+//                                    CategoryLevel2 category= list_cat_1[0].listSub_cat[index];
 //                                    return Padding(
 //
 //                                      padding: EdgeInsets.only(right: 10),
@@ -267,7 +318,7 @@ class _HomePageState extends State<HomePage> {
 //                                              child: Column(
 //                                                children: <Widget>[
 //                                                  Container(
-//                                                    child: Image.network(category.imgUrl !=null?category.imgUrl : "https://i.pinimg.com/236x/30/87/8d/30878dc76c22265aa23b6c0328886113.jpg" ,fit: BoxFit.fill,
+//                                                    child: Image.network("https://fashionshopuit-server.azurewebsites.net/image/"+category.imgUrl !=null?category.imgUrl : "https://i.pinimg.com/236x/30/87/8d/30878dc76c22265aa23b6c0328886113.jpg" ,fit: BoxFit.fill,
 //                                                      width: MediaQuery.of(context).size.width/5+20,
 //                                                      height: MediaQuery.of(context).size.height/4-40,
 //
@@ -431,7 +482,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         onTap: (){
                                           Navigator.push(context,MaterialPageRoute(
-                                              builder: (context)=> Product_Detail(product: state.data[index],index: index,)
+                                              builder: (context)=> Product_Detail(product: state.data[index],index: index,email: context.bloc<LoginBloc>().getEmail,)
                                           )
                                           );
 

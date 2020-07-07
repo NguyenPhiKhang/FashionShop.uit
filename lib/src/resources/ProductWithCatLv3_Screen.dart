@@ -1,5 +1,6 @@
 import 'package:fashionshop/src/CardView/CategoryCardWithIcon.dart';
 import 'package:fashionshop/src/CardView/ProductCard.dart';
+import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
@@ -237,7 +238,7 @@ controller: _scrollController2,
                   ///Danh Mục Catelv3 With Icon
                   Container(
                     decoration: BoxDecoration(color: Colors.white),
-                    height: MediaQuery.of(context).size.height/2+44,
+                    height: MediaQuery.of(context).size.height/4+40,
                     width:MediaQuery.of(context).size.width ,
                     padding: EdgeInsets.only(top: 10,left: 10),
                     margin: EdgeInsets.only(top:10,left:0,bottom: 10),
@@ -257,7 +258,7 @@ controller: _scrollController2,
                         Row(
                           children: <Widget>[
                             Container(
-                                height: (MediaQuery.of(context).size.height/2+4),
+                                height: (MediaQuery.of(context).size.height/4+4),
                                 width:MediaQuery.of(context).size.width -10,
 
 
@@ -400,20 +401,20 @@ controller: _scrollController2,
 
                                 return Container(
                                   margin: EdgeInsets.only(top: 10,left: 10,right: 10),
-                                  color: Colors.black,
+                                  color: Colors.white.withOpacity(0),
                                   //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                   child:GestureDetector(
                                       child: Container(
 
                                         height: MediaQuery.of(context).size.height/3+10,
-                                        decoration: BoxDecoration(color: Colors.black,backgroundBlendMode: BlendMode.colorBurn,borderRadius: BorderRadius.circular(0),border: Border.all(color: Colors.white)),
+                                        decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,borderRadius: BorderRadius.circular(0),border: Border.all(color: Colors.white)),
                                         child:
                                         ProductCard(product: state.data[index],index: index,),
 
                                       ),
                                       onTap: (){
                                  Navigator.push(context,MaterialPageRoute(
-                                          builder: (context)=> Product_Detail(product: state.data[index],index: index,)
+                                          builder: (context)=> Product_Detail(product: state.data[index],index: index,email: context.bloc<LoginBloc>().getEmail,)
                                       )
                                       );
                                       }

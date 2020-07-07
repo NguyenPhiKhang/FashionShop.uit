@@ -2,11 +2,12 @@
 import 'dart:ffi';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fashionshop/src/FirebaseMethod/FirebaseMethod.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_html/flutter_html.dart';
+
 import 'package:intl/intl.dart';
 
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -15,9 +16,10 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 
 class Product_Detail extends StatefulWidget {
+  final String email;
   final Product product;
   final int index;
-  Product_Detail({this.product,this.index});
+  Product_Detail({this.product,this.index,@required this.email});
   @override
   _Product_DetailState createState() => _Product_DetailState();
 }
@@ -25,6 +27,7 @@ class Product_Detail extends StatefulWidget {
 class _Product_DetailState extends State<Product_Detail> {
   List<AttributeValue> listSize =[];
   List<AttributeValue> listColor =[];
+  String option_amountId;
   int _current =0;
   bool isExpanded =false;
   List<T> map<T> (List list, Function handler){
@@ -232,8 +235,14 @@ child: Column(
                             if(_currentColorId!=null && _currentSizeId!= null)
                               for(int i=0;i<widget.product.list_optionAmount.length;i++)
                               {
-                                if(widget.product.list_optionAmount[i].option_color==_currentColorId && widget.product.list_optionAmount[i].option_size ==_currentSizeId)
-                                  soluongtonkho= widget.product.list_optionAmount[i].amount;
+                                if(widget.product.list_optionAmount[i].option_color==_currentColorId && widget.product.list_optionAmount[i].option_size ==_currentSizeId) {
+                                  soluongtonkho =
+                                      widget.product.list_optionAmount[i]
+                                          .amount;
+                                  option_amountId =
+                                      widget.product.list_optionAmount[i].id;
+                                }
+
                               }
                           });
                         },
@@ -493,7 +502,15 @@ child: Column(
 
                color: Color(0xffDB3022),
 
-               onPressed: (){},
+               onPressed: (){
+                 Map<String,dynamic> mapCartItem ={
+                   "productId": widget.product.id,
+                   "option_amount": option_amountId,
+                   "amount"      : 1,
+                 };
+                     FireBaseMethod().addtoCart(widget.email, mapCartItem);
+
+               },
                child: Text("ADD TO CART",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
              ),
 

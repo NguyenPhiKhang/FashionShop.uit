@@ -1,6 +1,8 @@
 
 
 
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FireBaseMethod {
@@ -45,12 +47,19 @@ class FireBaseMethod {
         .snapshots();
   }
 
-  addCart(String email,mapCartItem)
+  addtoCart(String email,mapCartItem)
   {
     Firestore.instance.collection("Users")
         .document(email)
         .collection("Cart")
         .add(mapCartItem).catchError((e){print(e);});
+  }
+  getCartItem (String email)async
+  {
+   return await Firestore.instance.collection("Users")
+        .document(email)
+        .collection("Cart")
+        .snapshots();
   }
 
   addFavorite (String email,mapFavoriteItem)

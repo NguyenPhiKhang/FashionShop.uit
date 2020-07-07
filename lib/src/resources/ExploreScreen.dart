@@ -99,7 +99,7 @@ class Explore_TabPage extends StatelessWidget {
                                 Colors.black54.withOpacity(0.2),
                                 BlendMode.srcATop),
                             child: Image.network(
-                              categoryLevel1.listSub_cat[i].imgUrl ==null ? "https://i.pinimg.com/236x/5b/8c/2f/5b8c2fcde3715bf0727f93164be0d58e.jpg" : categoryLevel1.listSub_cat[i].imgUrl,
+                              categoryLevel1.listSub_cat[i].imgUrl ==null ? "https://i.pinimg.com/236x/5b/8c/2f/5b8c2fcde3715bf0727f93164be0d58e.jpg" : "https://fashionshopuit-server.azurewebsites.net/image/"+categoryLevel1.listSub_cat[i].imgUrl,
                               height: MediaQuery
                                   .of(context)
                                   .size
