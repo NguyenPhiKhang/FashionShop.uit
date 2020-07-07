@@ -44,43 +44,63 @@ Fashion Shop APP
 -	Quản lý các đơn hàng người dùng lựa chọn
 -	Quản lý các đơn hàng khuyến mãi nổi lên trang đầu
 
+
+Screen Shot 2020-07-07 at 09.55.08.png
+update
+1 minute ago
+Screen Shot 2020-07-07 at 09.55.38.png
+update
+1 minute ago
+Screen Shot 2020-07-07 at 09.56.18.png
+update
+1 minute ago
+Screen Shot 2020-07-07 at 09.57.08.png
+update
+1 minute ago
+Screen Shot 2020-07-07 at 09.57.26.png
+update
+1 minute ago
+Screen Shot 2020-07-07 at 09.57.45.png
+update
+
+
 ## ✨ Screenshots
 <table style="width:100%">
 <tr>
     <th width=300> <p align="center">
-      <p>Main Screen</p>
-       <img src="https://user-images.githubusercontent.com/45101536/72078593-f9749980-332b-11ea-9548-1add2ebc3c9b.gif"
+      <p>Trang Chủ</p>
+       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.55.38.png"
             width="200" height="400"><br>
       </p>
   </th>
     <th width=300> <p align="center">
-       <p>Movie Details</p>
-       <img src="https://user-images.githubusercontent.com/45101536/72081510-342d0080-3331-11ea-8cd6-f5a69372590c.gif"
+       <p>Đăng Nhập</p>
+       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.55.08.png"
              width="200" height="400"><br>
   </p>
   </th>
   <th width=300> <p align="center">
-       <p>Favorites Screen</p>
-       <img src="https://user-images.githubusercontent.com/45101536/72080015-92a4af80-332e-11ea-805c-1f7e0f0a44fb.png"  width="200" height="400"><br>
+       <p>Chat</p>
+       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.56.18.png"  width="200" height="400"><br>
       </p>
   </th>
 </tr>
 <tr>
     <th  width=300> <p align="center">
-      <p>Search Screen</p>
-       <img src="https://user-images.githubusercontent.com/45101536/72077331-a568b580-3329-11ea-90fe-a697e270fd81.png"
+      <p>Danh mục 1</p>
+       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.57.08.png"
             width="200" height="400"><br>
       </p>
   </th>
     <th width=300> <p align="center">
-       <p>Player Screen</p>
-       <img src="https://user-images.githubusercontent.com/45101536/72083339-380e5200-3334-11ea-9502-cd1230968f74.gif"
+       <p>Danh mục 2</p>
+       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.57.26.png"
              width="200" height="400"><br>
   </p>
   </th>
   <th width=300> <p align="center">
-       <p>Categories Screen</p>
-       <img src="https://user-images.githubusercontent.com/45101536/72079655-e6fb5f80-332d-11ea-9471-be6a9486e348.gif"  width="200" height="400"><br>
+       <p>anh mục 3</p>
+       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.57.45.png"  width="200" height="400"><br>
       </p>
   </tr>
 </table>
