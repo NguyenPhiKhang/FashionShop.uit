@@ -5,33 +5,55 @@ import 'package:flutter/material.dart';
 class ConversationScreen extends StatefulWidget {
   final String chatRoomId;
   final String Myname;
+  final String chattingWithname;
 
-  const ConversationScreen({ this.chatRoomId,this.Myname}) ;
+  const ConversationScreen({ this.chatRoomId,this.Myname,this.chattingWithname}) ;
   @override
   _ConservationScreenState createState() => _ConservationScreenState();
 }
 
 class _ConservationScreenState extends State<ConversationScreen> {
-
+ScrollController scrollController=ScrollController();
 TextEditingController messageController = TextEditingController();
 Stream  chatMessageStream;
   Widget ChatMessageList(){
          return StreamBuilder(
            stream: chatMessageStream,
+
            builder: (context,snapshot)
-           { return snapshot.hasData? ListView.builder(
-             itemCount: snapshot.data.documents.length,
-             itemBuilder: (context,index)
-             {
-               return MessageTile(snapshot.data.documents[index].data["message"],
-                   snapshot.data.documents[index].data["sendBy"]==widget.Myname
-               );
-             },
+           {
+             WidgetsBinding.instance.addPostFrameCallback((_) {
+               try {
+                 scrollController.animateTo(
+                   scrollController.position.maxScrollExtent,
+                   curve: Curves.easeOut,
+                   duration: const Duration(milliseconds: 300),
+                 );
+               }catch(e){}
+             });
+
+             return snapshot.hasData? Container(
+             margin: EdgeInsets.only(bottom: 70),
+             child: ListView.builder(
+
+               controller: scrollController,
+               scrollDirection: Axis.vertical,
+               itemCount: snapshot.data.documents.length,
+               itemBuilder: (context,index)
+               {
+                 return MessageTile(snapshot.data.documents[index].data["message"],
+                     snapshot.data.documents[index].data["sendBy"]==widget.Myname
+                 );
+               },
+             ),
            ):Container();
 
 
            },
+
+
          );
+
   }
 
   sendMessage(){
@@ -43,6 +65,8 @@ Stream  chatMessageStream;
       };
       FireBaseMethod().addConservationMessages(widget.chatRoomId, messageMap);
       messageController.text ="";
+
+
     }
   }
 
@@ -57,6 +81,7 @@ Stream  chatMessageStream;
     );
     super.initState();
 
+
   }
   @override
 
@@ -70,18 +95,18 @@ Stream  chatMessageStream;
           },
           child: Icon(
             Icons.arrow_back,
-            color: Colors.blue,
+            color: Colors.white,
             size: 30,
           ),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: Color(0xFF4ab3b5),
         title: Text(
-          "Chat",
+          widget.chattingWithname,
           style: TextStyle(color: Colors.white),
         ),
       ),
       body: Container(
-        color: Colors.black.withOpacity(0.85),
+        color: Color(0xffffffff),
         child: Stack(
           children: <Widget>[
             ChatMessageList(),
@@ -89,7 +114,7 @@ Stream  chatMessageStream;
               alignment: Alignment.bottomCenter,
               child: Container(
                 color: Colors.grey,
-                padding: EdgeInsets.symmetric(horizontal: 24,vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 24,vertical: 10),
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -114,14 +139,15 @@ Stream  chatMessageStream;
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              const Color(0x36FFFFFF),
-                              const Color(0x0FFFFFFF)
+                              const Color(0xffFFFFFF),
+                              const Color(0xffFFFFFF)
                             ]
                           ),
-                          borderRadius: BorderRadius.circular(40)
+                          borderRadius: BorderRadius.circular(40),
+                          border: Border.all(color: Colors.white)
                         ),
                         padding: EdgeInsets.all(12),
-                        child: Icon(Icons.send,color: Colors.white,size: 20,),
+                        child: Icon(Icons.send,color: Colors.blue,size: 20,),
                       ),
                     )
                   ],
@@ -156,12 +182,13 @@ class MessageTile extends StatelessWidget {
               const Color(0xff2A75BC)
             ] :
                 [
-                  const Color(0x1AFFFFFF),
-                  const Color(0x1AFFFFFF)
+                  const Color(0xffF1F0F0),
+                  const Color(0xffF1F0F0)
                 ]
-          )
+          ),
+          borderRadius: BorderRadius.circular(12)
         ),
-          child: Text(message, style: TextStyle(fontSize: 12,color: Colors.white),)
+          child: Text(message, style: TextStyle(fontSize: 12, color: isSendByMe?Colors.white:Colors.black),)
       ),
     );
   }

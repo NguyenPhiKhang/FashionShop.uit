@@ -1,3 +1,6 @@
+import 'package:fashionshop/src/model/Filter.dart';
+
+import 'package:fashionshop/src/model/Filter.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
@@ -40,6 +43,34 @@ const ProductByCategoryCodeEvent({@required this.category_code});
 
   @override
   List<Object> get props => [category_code];
+
+  @override
+  String toString() =>
+      'ProductButtonPressed { ... }';
+}
+class ProductGetMoreDataByCategoryCodeEvent extends ProductEvent {
+
+  final int SortBy;
+  final Filter filter;
+  const ProductGetMoreDataByCategoryCodeEvent({this.SortBy,this.filter});
+  @override
+  List<Object> get props => [SortBy,Filter];
+
+  @override
+  String toString() =>
+      'ProductButtonPressed { ... }';
+}
+
+
+class FilterandSortByEvent extends ProductEvent {
+
+  final int SortBy;
+  final Filter filter;
+  const FilterandSortByEvent({this.SortBy,this.filter});
+
+
+  @override
+  List<Object> get props => [SortBy,Filter];
 
   @override
   String toString() =>

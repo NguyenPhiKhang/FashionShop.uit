@@ -40,7 +40,7 @@ class _PaymentMethod_ScreenState extends State<PaymentMethod_Screen> {
 
     ],
     textTheme:TextTheme(),
-    backgroundColor: Color(0xffB98959),
+    backgroundColor: Color(0xFF4ab3b5),
     title: Text("Explore",style: TextStyle(color: Colors.white)),
     ),
         body: Container(

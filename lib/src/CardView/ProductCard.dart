@@ -55,7 +55,7 @@ class ProductCard extends StatelessWidget {
                               color: Colors.red,
                               fontWeight: FontWeight.w500
 
-                            ),),
+                            ),textAlign: TextAlign.center,),
                         ),
 
 
@@ -82,7 +82,7 @@ class ProductCard extends StatelessWidget {
                             alignment: Alignment.centerLeft,
 
                             child:
-                            Text(NumberFormat.simpleCurrency(locale: "vi").format(product.price).toString(),style: TextStyle(fontSize: 18,color: Colors.blue,fontWeight: FontWeight.w500,),
+                            Text(NumberFormat.simpleCurrency(locale: "vi").format(product.final_price).toString(),style: TextStyle(fontSize: 18,color: Colors.blue,fontWeight: FontWeight.w500,),
                             ),
 
                           )

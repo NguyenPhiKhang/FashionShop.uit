@@ -39,7 +39,7 @@ class _Products_ScreenState extends State<Products_Screen> {
                backgroundColor: Color(0xffE7E7E7),
                appBar: AppBar(
                  title: Center(child: Text(widget.title)),
-
+                   backgroundColor: Color(0xFF4ab3b5),
                  leading: GestureDetector(
                    onTap: () {
                      Navigator.pop(context);
