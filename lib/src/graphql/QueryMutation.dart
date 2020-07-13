@@ -30,6 +30,7 @@ String GetAllCategories = '''
     name
     
     subCat{
+      icon
       name
       category_code
       image

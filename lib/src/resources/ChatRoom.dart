@@ -22,6 +22,7 @@ Widget chatRoomList (){
     builder: (context,snapshot)
     {
       return snapshot.hasData? ListView.builder(
+        scrollDirection: Axis.vertical,
         itemCount: snapshot.data.documents.length,
           itemBuilder: (context,index)
           { return  ChatRoomTile(
@@ -52,20 +53,13 @@ Widget chatRoomList (){
     return Scaffold(
       backgroundColor: Colors.black87,
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.blue,
-            size: 30,
+
+        backgroundColor: Color(0xFF4ab3b5),
+        title: Center(
+          child: Text(
+            "ChatRoom",
+            style: TextStyle(color: Colors.white),
           ),
-        ),
-        backgroundColor: Colors.red,
-        title: Text(
-          "ChatRoom",
-          style: TextStyle(color: Colors.white),
         ),
       ),
       body:chatRoomList() ,
@@ -85,11 +79,11 @@ final String chatRoomId;
     return GestureDetector(
       onTap: (){
         Navigator.push(context,MaterialPageRoute(
-          builder: (context) => ConversationScreen(chatRoomId: chatRoomId,Myname: MyName,)
+          builder: (context) => ConversationScreen(chatRoomId: chatRoomId,Myname: MyName,chattingWithname: userName,)
         ));
       },
       child: Container(
-        height: MediaQuery.of(context).size.height,
+       // height: MediaQuery.of(context).size.height,
         margin: EdgeInsets.symmetric(horizontal: 24,vertical: 10),
         child: Row(
           children: <Widget>[

@@ -1,5 +1,6 @@
 
 
+import 'package:fashionshop/src/bloc/CategoryBloc/CategoryBloc.dart';
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryEvent.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 
@@ -49,7 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
             )..add(ProductGetMoreDataEvent());
           },
-          child:HomePage()
+          child:BlocProvider<CategoryBloc>(
+              create: (context) {
+                return CategoryBloc()
+                  ..add(InitiateEvent());
+              },
+              child: HomePage())
+          //HomePage()
       )
       ,
       CartScreen(email: context.bloc<LoginBloc>().getEmail),
@@ -67,10 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
             currentIndex: currentIndex ,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.red,
-            selectedFontSize: 20,
+            selectedItemColor: Color(0xFF4ab3b5),
             unselectedFontSize: 14,
-            selectedIconTheme: IconThemeData(size: 40),
             unselectedIconTheme: IconThemeData(size: 20,color: Colors.black54),
             backgroundColor: Colors.white,
 

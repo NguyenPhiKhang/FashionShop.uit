@@ -67,7 +67,7 @@ List<CategoryLevel1> list_cat_1 =[];
                   {
                     list_cat_3.add(new CategoryLevel3(listdata_level3[k]["icon"], listdata_level3[k]["name"],listdata_level3[k]["category_code"]));
                   }
-                list_cat_2.add(new CategoryLevel2(listdata_level2[j]["icon"], listdata_level2[j]["name"],listdata_level2[j]["category_code"] ,list_cat_3));
+                list_cat_2.add(new CategoryLevel2(listdata_level2[j]["icon"],listdata_level2[j]["image"], listdata_level2[j]["name"],listdata_level2[j]["category_code"] ,list_cat_3));
 
               }
 

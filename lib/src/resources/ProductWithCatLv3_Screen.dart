@@ -5,6 +5,7 @@ import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
 import 'package:fashionshop/src/model/Category.dart';
+import 'package:fashionshop/src/model/Filter.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:fashionshop/src/resources/Filter_Screen.dart';
 import 'package:fashionshop/src/resources/ProductScreen.dart';
@@ -38,6 +39,8 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
   ScrollController _scrollController2=ScrollController();
   bool flag =true;
 
+
+
   @override
   void initState()
   {
@@ -64,8 +67,6 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
 
         }
 
-        if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
-          context.bloc<ProductBloc>().add(ProductGetMoreDataEvent());
 
       });
 
@@ -75,16 +76,38 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
 
     return  BlocBuilder<ProductBloc,ProductsState>(
         builder:(context,state) {
+          if(state.filterRules!=null)
+            {
+
+
+
+                _scrollController.addListener(() {
+                  if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
+
+                      context.bloc<ProductBloc>().add(ProductGetMoreDataByCategoryCodeEvent(filter: state.filterRules));
+
+
+                });
+            }
+          else   _scrollController.addListener(() {
+            if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
+
+              context.bloc<ProductBloc>().add(ProductByCategoryCodeEvent(category_code: widget.categoryLevel2.level_code));
+
+
+          });
+
+
           return Scaffold(
             backgroundColor: Color(0xffE5E5E5),
             appBar: AppBar(
               title: Center(child: Text(widget.title)),
-
+              backgroundColor: Color(0xFF4ab3b5),
               leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
         },
-                child: Icon(Icons.arrow_back, color: Colors.blue, size: 30,),
+                child: Icon(Icons.arrow_back, color: Colors.white, size: 30,),
               ),
 
               actions: <Widget>[
@@ -236,84 +259,80 @@ controller: _scrollController2,
 //
 //                    ),
                   ///Danh Mục Catelv3 With Icon
-                  Container(
-                    decoration: BoxDecoration(color: Colors.white),
-                    height: MediaQuery.of(context).size.height/4+40,
-                    width:MediaQuery.of(context).size.width ,
-                    padding: EdgeInsets.only(top: 10,left: 10),
-                    margin: EdgeInsets.only(top:10,left:0,bottom: 10),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              child: Text("Danh mục", style: TextStyle(fontSize: 10,color: Colors.black45),),
+                  Center(
+                    child: Container(
+                         color: Colors.white,
+                      height: 50,
+                      width:MediaQuery.of(context).size.width ,
+                      padding: EdgeInsets.only(top: 10,bottom: 10),
+                      margin: EdgeInsets.only(top:10,left:0,bottom: 10),
+                      child: Column(
+                        children: <Widget>[
 
-                              height: 20,
-                            ),
-                          ],
+                          Row(
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                    height: 30,
+                                    width:MediaQuery.of(context).size.width,
 
-                        ),
+                                    child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                        itemBuilder:(context,index)
+                                        {
+                                          CategoryLevel3 category= widget.categoryLevel2.listSub_cat[index];
+                                          return GestureDetector(
+                                                child: Container(
 
-                        Row(
-                          children: <Widget>[
-                            Container(
-                                height: (MediaQuery.of(context).size.height/4+4),
-                                width:MediaQuery.of(context).size.width -10,
+                                                  height: 20,
+                                                  width: 100,
+                                                  margin: index!=0?EdgeInsets.only(left: 10):EdgeInsets.only(left: 0),
+                                                  padding: EdgeInsets.only(left: 5,right: 5),
+                                                  decoration: BoxDecoration(color:Color(0xff222222),
+                                                    borderRadius: BorderRadius.circular(16)
+                                                  ),
+                                                  child: Center(child: Text(category.name,style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.w700),textAlign: TextAlign.center,))
 
+                                                ),
+                                                onTap: (){
+                                                  Navigator.push(context,MaterialPageRoute(
+                                                      builder: (context)=> BlocProvider<ProductBloc>(
+                                                          create: (context){
+                                                            return ProductBloc(
 
-
-                                child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                    itemBuilder:(context,index)
-                                    {
-                                      CategoryLevel3 category= widget.categoryLevel2.listSub_cat[index];
-                                      return Padding(
-
-                                        padding: EdgeInsets.only(right: 10),
-                                        child:GestureDetector(
-                                            child: Container(
-                                              decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,),
-                                              child: CategoryCardWithIcon(categoryLevel3:category),
-
-                                            ),
-                                            onTap: (){
-                                              Navigator.push(context,MaterialPageRoute(
-                                                  builder: (context)=> BlocProvider<ProductBloc>(
-                                                      create: (context){
-                                                        return ProductBloc(
-
-                                                        )..add(ProductByCategoryCodeEvent(category_code: category.level_code));
-                                                      },
-                                                      child: Products_Screen(title: "Products of " +category.name,level_code: category.level_code,)
+                                                            )..add(ProductByCategoryCodeEvent(category_code: category.level_code));
+                                                          },
+                                                          child: Products_Screen(title: category.name,level_code: category.level_code,)
+                                                      )
                                                   )
-                                              )
-                                              );
-                                            }
+                                                  );
+                                                }
 
-                                        ),
+                                            );
 
-                                      );
 
-                                    },
-                                  itemCount:widget.categoryLevel2.listSub_cat.length ,
 
-                                )
+                                        },
+                                      itemCount:widget.categoryLevel2.listSub_cat.length ,
 
-                            ),
-                          ],
-                        ),
-                      ],
+                                    )
+
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
                     ),
-
                   ),
 
 
 
                   Container(
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: EdgeInsets.only(bottom: 5,top: 5),
                     height: 30,
-                    color: Colors.yellowAccent.withOpacity(0.50),
+                    decoration: BoxDecoration(color: Colors.white,border: Border.all(color: Colors.grey.withOpacity(0.5))),
 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -321,7 +340,11 @@ controller: _scrollController2,
                         Container(
                           child: FlatButton.icon(onPressed: () {
                             Navigator.push(context,MaterialPageRoute(
-                                builder: (context)=> Filter_Screen()
+                                builder: (_)=> BlocProvider.value(
+                                  value: context.bloc<ProductBloc>(),
+                                  child: Filter_Screen(category_code: widget.categoryLevel2.level_code)
+                                )
+
                             )
                             );
                           },
@@ -333,7 +356,7 @@ controller: _scrollController2,
                           child: GestureDetector(
                             child: FlatButton.icon(onPressed: () {
                               showModalBottomSheet(context: context,
-                                  builder: (context) {
+                                  builder: (_) {
                                     return Column(
                                       children: <Widget>[
                                         ListTile(
@@ -372,10 +395,10 @@ controller: _scrollController2,
 
 
 
-                  Container(
-                    height: MediaQuery.of(context).size.height-130,
+                  state.data.length!=0?Container(
+                    height: MediaQuery.of(context).size.height-150,
                      color: Color(0xffE5E5E5),
-                    margin: EdgeInsets.only(top:0),
+                    margin: EdgeInsets.only(left: 10),
                     child: CustomScrollView (
                       shrinkWrap: true,
                       primary: false,
@@ -389,9 +412,8 @@ controller: _scrollController2,
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
 
                               crossAxisCount: 2,
-                              childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+10),
+                              childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+15),
                               //mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
                               //childAspectRatio: AppSizes.tile_width / AppSizes.tile_height,
                             ),
                             delegate: SliverChildBuilderDelegate(
@@ -400,7 +422,7 @@ controller: _scrollController2,
                                   (BuildContext context, int index) {
 
                                 return Container(
-                                  margin: EdgeInsets.only(top: 10,left: 10,right: 10),
+                                  margin: EdgeInsets.only(top: 10,right: 10),
                                   color: Colors.white.withOpacity(0),
                                   //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                   child:GestureDetector(
@@ -429,6 +451,8 @@ controller: _scrollController2,
                           ),
                         ]
                     ),
+                  ):Container(
+                    child: Center(child: Text("Không có dữ liệu nào trùng khớp.",style: TextStyle(fontSize: 14,color: Colors.black),),),
                   ),
 
                 ],

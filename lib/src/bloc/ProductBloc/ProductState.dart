@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:fashionshop/src/model/Filter.dart';
 import 'package:fashionshop/src/model/Product.dart';
 
 abstract class ProductsState extends Equatable {
   final List<Product> data;
-  final String sortBy;
-  final List<String> filterRules;
+  final int sortBy;
+  final Filter filterRules;
   final String error;
 
   ProductsState({
@@ -16,8 +17,8 @@ abstract class ProductsState extends Equatable {
 
   ProductsState copyWith({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   });
 
@@ -40,8 +41,8 @@ abstract class ProductsState extends Equatable {
 class ProductsGridViewState extends ProductsState {
   ProductsGridViewState({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   }) : super(
       data: data, sortBy: sortBy, filterRules: filterRules, error: error);
@@ -54,8 +55,8 @@ class ProductsGridViewState extends ProductsState {
   @override
   ProductsGridViewState copyWith({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   }) {
     return ProductsGridViewState(
@@ -69,8 +70,8 @@ class ProductsGridViewState extends ProductsState {
 class ProductsAddmoreState extends ProductsState {
   ProductsAddmoreState({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   }) : super(
       data: data, sortBy: sortBy, filterRules: filterRules, error: error);
@@ -83,8 +84,8 @@ class ProductsAddmoreState extends ProductsState {
   @override
   ProductsAddmoreState copyWith({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   }) {
     return ProductsAddmoreState(
@@ -99,8 +100,8 @@ class ProductsAddmoreState extends ProductsState {
 class Loading extends ProductsState {
   Loading({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   }) : super(
       data: data, sortBy: sortBy, filterRules: filterRules, error: error);
@@ -113,8 +114,8 @@ class Loading extends ProductsState {
   @override
   Loading copyWith({
     List<Product> data,
-    String sortBy,
-    List<String> filterRules,
+    int sortBy,
+    Filter filterRules,
     String error,
   }) {
     return Loading(

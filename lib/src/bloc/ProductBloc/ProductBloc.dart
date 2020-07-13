@@ -37,7 +37,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductsState>
            }
            if(event is ProductGetMoreDataEvent )
              {  // get Products from data.length-1 then add into dat
-
+                   print("Productgetmoredata event");
                QueryResult result = await _client.query(
                    QueryOptions(
                        documentNode: gql(getProduct),
@@ -49,49 +49,67 @@ class ProductBloc extends Bloc<ProductEvent, ProductsState>
                    )
 
                );
-
-               List<LazyCacheMap> list_to_add =
-               (result.data["getProduct"] as List<dynamic>).cast<LazyCacheMap>();
-
-
-               for(int i=0;i<list_to_add.length;i++)
-               {
-                 List<LazyCacheMap> listdata_att =
-                 (
-                     list_to_add[i]["attribute"] as List<dynamic>).cast<LazyCacheMap>();
-                 List<Attribute> list_att=[];
-                 for(int j=0;j<listdata_att.length;j++)
-                   {
-                     ///add attribute
-                     List<LazyCacheMap> listdata_attValue =
-                     (listdata_att[j]["value"] as List<dynamic>).cast<LazyCacheMap>();
-
-                     List<AttributeValue> list_attValue =[];
-                     for(int k=0;k<listdata_attValue.length;k++)
-                       {
-                         list_attValue.add(new AttributeValue(listdata_attValue[k]["_id"], listdata_attValue[k]["name"]));
-                       }
-                     list_att.add(new Attribute((listdata_att[j]["attribute"] as dynamic )["name"], list_attValue));
-                   }
-
-                    ///add Optionamount
-                 List<LazyCacheMap> listdata_optionAmount =
-                 (list_to_add[i]["option_amount"] as List<dynamic>).cast<LazyCacheMap>();
-
-                List<OptionAmount> list_optionAmount =[];
-                 for(int j=0;j<listdata_optionAmount.length;j++)
-                   {
-                     list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
-                   }
+           if(!result.hasException) {
+             List<LazyCacheMap> list_to_add =
+             (result.data["getProduct"] as List<dynamic>).cast<LazyCacheMap>();
 
 
+             for (int i = 0; i < list_to_add.length; i++) {
+               List<LazyCacheMap> listdata_att =
+               (
+                   list_to_add[i]["attribute"] as List<dynamic>).cast<
+                   LazyCacheMap>();
+               List<Attribute> list_att = [];
+               for (int j = 0; j < listdata_att.length; j++) {
+                 ///add attribute
+                 List<LazyCacheMap> listdata_attValue =
+                 (listdata_att[j]["value"] as List<dynamic>).cast<
+                     LazyCacheMap>();
 
-
-
-                 listdata.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"],  list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
+                 List<AttributeValue> list_attValue = [];
+                 for (int k = 0; k < listdata_attValue.length; k++) {
+                   list_attValue.add(new AttributeValue(
+                       listdata_attValue[k]["_id"],
+                       listdata_attValue[k]["name"]));
+                 }
+                 list_att.add(new Attribute(
+                     (listdata_att[j]["attribute"] as dynamic)["name"],
+                     list_attValue));
                }
-               currentPage++;
 
+               ///add Optionamount
+               List<LazyCacheMap> listdata_optionAmount =
+               (list_to_add[i]["option_amount"] as List<dynamic>).cast<
+                   LazyCacheMap>();
+
+               List<OptionAmount> list_optionAmount = [];
+               for (int j = 0; j < listdata_optionAmount.length; j++) {
+                 list_optionAmount.add(new OptionAmount(
+                     listdata_optionAmount[j]["_id"],
+                     listdata_optionAmount[j]["option_size"],
+                     listdata_optionAmount[j]["option_color"],
+                     listdata_optionAmount[j]["amount"]));
+               }
+
+
+               listdata.add(new Product(
+                   list_to_add[i]["_id"],
+                   list_to_add[i]["name"],
+                   list_to_add[i]["img_url"],
+                   (list_to_add[i]["images"] as List<dynamic>).cast<String>(),
+                   list_to_add[i]["description"],
+                   list_to_add[i]["price"],
+                   list_to_add[i]["promotion_percent"],
+                   list_to_add[i]["final_price"],
+                   null,
+                   list_to_add[i]["stock_status"],
+                   list_to_add[i]["is_freeship"],
+                   list_att,
+                   list_optionAmount,
+                   list_to_add[i]["record_status"]));
+             }
+             currentPage++;
+           }
                 if(state is ProductsGridViewState)
                yield ProductsAddmoreState(data: listdata);
                 else
@@ -117,52 +135,195 @@ class ProductBloc extends Bloc<ProductEvent, ProductsState>
 
                );
 
+               if(!result.hasException)
+               {
                List<LazyCacheMap> list_to_add =
                (result.data["getProductByCategory"] as List<dynamic>).cast<LazyCacheMap>();
 
 
                for(int i=0;i<list_to_add.length;i++)
                {
-                 List<LazyCacheMap> listdata_att =
-                 (
-                     list_to_add[i]["attribute"] as List<dynamic>).cast<LazyCacheMap>();
-                 List<Attribute> list_att=[];
-                 for(int j=0;j<listdata_att.length;j++)
-                 {
-                   ///add attribute
-                   List<LazyCacheMap> listdata_attValue =
-                   (listdata_att[j]["value"] as List<dynamic>).cast<LazyCacheMap>();
+               List<LazyCacheMap> listdata_att =
+               (
+               list_to_add[i]["attribute"] as List<dynamic>).cast<LazyCacheMap>();
+               List<Attribute> list_att=[];
+               for(int j=0;j<listdata_att.length;j++)
+               {
+               ///add attribute
+               List<LazyCacheMap> listdata_attValue =
+               (listdata_att[j]["value"] as List<dynamic>).cast<LazyCacheMap>();
 
-                   List<AttributeValue> list_attValue =[];
-                   for(int k=0;k<listdata_attValue.length;k++)
-                   {
-                     list_attValue.add(new AttributeValue(listdata_attValue[k]["_id"], listdata_attValue[k]["name"]));
-                   }
-                   list_att.add(new Attribute((listdata_att[j]["attribute"] as dynamic )["name"], list_attValue));
-                 }
+               List<AttributeValue> list_attValue =[];
+               for(int k=0;k<listdata_attValue.length;k++)
+               {
+               list_attValue.add(new AttributeValue(listdata_attValue[k]["_id"], listdata_attValue[k]["name"]));
+               }
+               list_att.add(new Attribute((listdata_att[j]["attribute"] as dynamic )["name"], list_attValue));
+               }
 
-                 ///add Optionamount
-                 List<LazyCacheMap> listdata_optionAmount =
-                 (list_to_add[i]["option_amount"] as List<dynamic>).cast<LazyCacheMap>();
+               ///add Optionamount
+               List<LazyCacheMap> listdata_optionAmount =
+               (list_to_add[i]["option_amount"] as List<dynamic>).cast<LazyCacheMap>();
 
-                 List<OptionAmount> list_optionAmount =[];
-                 for(int j=0;j<listdata_optionAmount.length;j++)
-                 {
-                   list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
-                 }
+               List<OptionAmount> list_optionAmount =[];
 
-
-
+               for(int j=0;j<listdata_optionAmount.length;j++)
+               {
+               list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
+               }
 
 
-                 listdataByCategory.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"],  list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
+               listdataByCategory.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"], list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
                }
                currentPageByCateGory++;
+               }
                if(state is ProductsGridViewState)
                  yield ProductsAddmoreState(data: listdataByCategory);
                else
                  yield ProductsGridViewState(data: listdataByCategory);
              }
+
+           if(event is FilterandSortByEvent)
+             {
+
+                print(event.SortBy);
+               if(event.filter!=null)
+                 {  currentPageFilter=1;
+                   QueryResult result = await _client.query(
+                       QueryOptions(
+                           documentNode: gql(getProductByCategory),
+                           variables:
+                           {
+                             "level_code": event.filter.level_code,
+                             "pageNumber": currentPageFilter,
+                             "colors": event.filter.colorID,
+                             "sizes": event.filter.sizeID,
+                             "price_min": event.filter.min_price,
+                             "price_max": event.filter.max_price
+                           }
+                       )
+
+                   );
+
+                   if(!result.hasException)
+                   {  listdataFilter=[];
+                     List<LazyCacheMap> list_to_add =
+                     (result.data["getProductByCategory"] as List<dynamic>).cast<LazyCacheMap>();
+
+
+                     for(int i=0;i<list_to_add.length;i++)
+                     {
+                       List<LazyCacheMap> listdata_att =
+                       (
+                           list_to_add[i]["attribute"] as List<dynamic>).cast<LazyCacheMap>();
+                       List<Attribute> list_att=[];
+                       for(int j=0;j<listdata_att.length;j++)
+                       {
+                         ///add attribute
+                         List<LazyCacheMap> listdata_attValue =
+                         (listdata_att[j]["value"] as List<dynamic>).cast<LazyCacheMap>();
+
+                         List<AttributeValue> list_attValue =[];
+                         for(int k=0;k<listdata_attValue.length;k++)
+                         {
+                           list_attValue.add(new AttributeValue(listdata_attValue[k]["_id"], listdata_attValue[k]["name"]));
+                         }
+                         list_att.add(new Attribute((listdata_att[j]["attribute"] as dynamic )["name"], list_attValue));
+                       }
+
+                       ///add Optionamount
+                       List<LazyCacheMap> listdata_optionAmount =
+                       (list_to_add[i]["option_amount"] as List<dynamic>).cast<LazyCacheMap>();
+
+                       List<OptionAmount> list_optionAmount =[];
+
+                       for(int j=0;j<listdata_optionAmount.length;j++)
+                       {
+                         list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
+                       }
+
+
+                       listdataFilter.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"], list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
+                     }
+
+                   }
+                   if(state is ProductsGridViewState)
+                     yield ProductsAddmoreState(filterRules: event.filter,data: listdataFilter);
+                   else
+                     yield ProductsGridViewState(filterRules: event.filter,data: listdataFilter);
+
+
+                 }
+             }
+                   if(event is ProductGetMoreDataByCategoryCodeEvent)
+                     {
+                       QueryResult result = await _client.query(
+                           QueryOptions(
+                               documentNode: gql(getProductByCategory),
+                               variables:
+                               {
+                                 "level_code": event.filter.level_code,
+                                 "pageNumber": currentPageFilter,
+                                 "colors": event.filter.colorID,
+                                 "sizes": event.filter.sizeID,
+                                 "price_min": event.filter.min_price,
+                                 "price_max": event.filter.max_price
+                               }
+                           )
+
+                       );
+
+                       if(!result.hasException)
+                       {  listdataFilter=[];
+                       List<LazyCacheMap> list_to_add =
+                       (result.data["getProductByCategory"] as List<dynamic>).cast<LazyCacheMap>();
+
+
+                       for(int i=0;i<list_to_add.length;i++)
+                       {
+                         List<LazyCacheMap> listdata_att =
+                         (
+                             list_to_add[i]["attribute"] as List<dynamic>).cast<LazyCacheMap>();
+                         List<Attribute> list_att=[];
+                         for(int j=0;j<listdata_att.length;j++)
+                         {
+                           ///add attribute
+                           List<LazyCacheMap> listdata_attValue =
+                           (listdata_att[j]["value"] as List<dynamic>).cast<LazyCacheMap>();
+
+                           List<AttributeValue> list_attValue =[];
+                           for(int k=0;k<listdata_attValue.length;k++)
+                           {
+                             list_attValue.add(new AttributeValue(listdata_attValue[k]["_id"], listdata_attValue[k]["name"]));
+                           }
+                           list_att.add(new Attribute((listdata_att[j]["attribute"] as dynamic )["name"], list_attValue));
+                         }
+
+                         ///add Optionamount
+                         List<LazyCacheMap> listdata_optionAmount =
+                         (list_to_add[i]["option_amount"] as List<dynamic>).cast<LazyCacheMap>();
+
+                         List<OptionAmount> list_optionAmount =[];
+
+                         for(int j=0;j<listdata_optionAmount.length;j++)
+                         {
+                           list_optionAmount.add(new OptionAmount(listdata_optionAmount[j]["_id"],listdata_optionAmount[j]["option_size"], listdata_optionAmount[j]["option_color"], listdata_optionAmount[j]["amount"]));
+                         }
+
+
+                         listdataFilter.add(new Product(list_to_add[i]["_id"],list_to_add[i]["name"], list_to_add[i]["img_url"], (list_to_add[i]["images"] as List<dynamic>).cast<String>(), list_to_add[i]["description"], list_to_add[i]["price"], list_to_add[i]["promotion_percent"],list_to_add[i]["final_price"], null, list_to_add[i]["stock_status"], list_to_add[i]["is_freeship"], list_att,list_optionAmount ,list_to_add[i]["record_status"]));
+                       }
+                                        currentPageFilter++;
+                       }
+                       if(state is ProductsGridViewState)
+                         yield ProductsAddmoreState(filterRules: event.filter,data: listdataFilter);
+                       else
+                         yield ProductsGridViewState(filterRules: event.filter,data: listdataFilter);
+
+                     }
+
+
+
 
 
 

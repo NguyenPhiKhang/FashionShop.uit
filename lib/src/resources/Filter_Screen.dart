@@ -1,7 +1,9 @@
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
+import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/graphql/QueryMutation.dart';
+import 'package:fashionshop/src/model/Filter.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Size {
   String Id;
@@ -48,15 +50,15 @@ List<color> list_color =[
 
 
 class Filter_Screen extends StatefulWidget {
-  final ProductBloc bloc;
+  final int category_code;
 
-  const Filter_Screen({this.bloc}) ;
+  const Filter_Screen({this.category_code});
   @override
   _Filter_ScreenState createState() => _Filter_ScreenState();
 }
 
 class _Filter_ScreenState extends State<Filter_Screen> {
-   RangeValues values =RangeValues(20,100);
+   RangeValues values =RangeValues(10000,3000000);
 
   @override
 
@@ -64,7 +66,7 @@ class _Filter_ScreenState extends State<Filter_Screen> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Filters"),
-
+              backgroundColor: Color(0xFF4ab3b5),
           elevation: 0.1,
           leading: GestureDetector(
             onTap: () {
@@ -105,11 +107,11 @@ class _Filter_ScreenState extends State<Filter_Screen> {
                   children:<Widget>[
                     Center(
                     child: RangeSlider(
-                      min: 0,
-                      max: 200,
+                      min: 1,
+                      max: 3000000,
                       values: values,
 
-                      divisions: 100,
+                      divisions: 300,
 
                       activeColor: Color(0xffDB3022),
                       inactiveColor: Color(0xff9B9B9B),
@@ -203,8 +205,7 @@ class _Filter_ScreenState extends State<Filter_Screen> {
                     onChanged: (bool value){
                       setState(() {
                         listSize[index].c=value;
-                        print(listSize[index].c);
-                        print(listSize[index+1].c);
+
                       });
                     },
                   );
@@ -243,6 +244,8 @@ Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                print(colorId);
                print(sizeId);
                Navigator.pop(context);
+               Filter filter = Filter(widget.category_code, colorId, sizeId, values.start, values.end);
+                 context.bloc<ProductBloc>().add(FilterandSortByEvent(filter: filter));
       },
     ),
     GestureDetector(

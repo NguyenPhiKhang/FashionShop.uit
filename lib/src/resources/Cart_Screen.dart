@@ -87,6 +87,23 @@ FireBaseMethod().getCartItem(widget.email).then((value) async
 
 
         return Scaffold(
+          appBar: AppBar(
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.blue,
+                size: 30,
+              ),
+            ),
+            backgroundColor: Color(0xFF4ab3b5),
+            title: Text(
+              "Giỏ Hàng",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
           backgroundColor: Color(0xffE7E7E7),
           body: Column(
             children: <Widget>[
@@ -236,7 +253,7 @@ FireBaseMethod().getCartItem(widget.email).then((value) async
                 ),
               ),
               Container(
-                height: 50,
+                height: 40,
                 decoration: BoxDecoration(color: Color(0xffDB3022),borderRadius: BorderRadius.circular(20)),
                 width: MediaQuery.of(context).size.width-20,
                 margin: EdgeInsets.only(left: 10,top: 10,bottom: 5),

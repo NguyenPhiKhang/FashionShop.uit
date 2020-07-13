@@ -56,7 +56,7 @@ class Explore_TabPage extends StatelessWidget {
                 create: (context){
                   return ProductBloc(
 
-                  )..add(ProductGetMoreDataEvent());
+                  )..add(ProductByCategoryCodeEvent(category_code: categoryLevel1.listSub_cat[i].level_code));
                 },
                    child: ProductWithCatLv3_Screen(title: categoryLevel1.listSub_cat[i].name,categoryLevel2: categoryLevel1.listSub_cat[i],)
                 )
@@ -68,58 +68,59 @@ class Explore_TabPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),),
 
 
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
 
             child: Row(
               children: <Widget>[
                 Container(width: MediaQuery
                     .of(context)
                     .size
-                    .width - 60,
+                    .width - 20,
                   height: MediaQuery
                       .of(context)
                       .size
                       .height *0.7 / 5,
 
                   decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(8)),
-                    border: new Border.all(
-                      color: Colors.red,
-                      width: 1.0,
-                    ),
+
                   ),
 
-                  child: Stack(
+                  child: Row(
                     children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(left: 8,right: 8),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(8),bottomLeft: Radius.circular(8))),
+                        height:MediaQuery
+                            .of(context)
+                            .size
+                            .height *0.7/ 5 ,
+                        width: (MediaQuery
+                            .of(context)
+                            .size
+                            .width - 20)/2,
+                        child: Center(
+                          child: Text(categoryLevel1.listSub_cat[i].name,
+                            style: TextStyle(fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),textAlign: TextAlign.left,),),
+                      ),
 
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: ColorFiltered(
-                            colorFilter: ColorFilter.mode(
-                                Colors.black54.withOpacity(0.2),
-                                BlendMode.srcATop),
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8)),
                             child: Image.network(
                               categoryLevel1.listSub_cat[i].imgUrl ==null ? "https://i.pinimg.com/236x/5b/8c/2f/5b8c2fcde3715bf0727f93164be0d58e.jpg" : "https://fashionshopuit-server.azurewebsites.net/image/"+categoryLevel1.listSub_cat[i].imgUrl,
                               height: MediaQuery
                                   .of(context)
                                   .size
                                   .height *0.7/ 5,
-                              width: MediaQuery
+                              width: (MediaQuery
                                   .of(context)
                                   .size
-                                  .width - 60,
+                                  .width - 20)/2,
                               fit: BoxFit.fill,)
                         ),
-
-
-                      ),
-
-                      Center(
-                        child: Text(categoryLevel1.listSub_cat[i].name,
-                          style: TextStyle(fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),),),
-
 
                     ],
                   ),
@@ -156,7 +157,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             home: DefaultTabController(
           length: context.bloc<CategoryBloc>().list_cat_1.length,
           child: Scaffold(
-            backgroundColor: Color(0xffB98959),
+            backgroundColor: Color(0xffE7E7E7),
             appBar: AppBar(
               leading: GestureDetector(
                 onTap: () {
@@ -164,7 +165,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 },
                 child: Icon(
                   Icons.arrow_back,
-                  color: Colors.blue,
+                  color: Colors.white,
                   size: 30,
                 ),
               ),
@@ -178,7 +179,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 ),
               ],
               textTheme: TextTheme(),
-              backgroundColor: Colors.red,
+              backgroundColor: Color(0xFF4ab3b5),
               title: Text(
                 "Explore",
                 style: TextStyle(color: Colors.white),
@@ -198,7 +199,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             ),
             body: Container(
               decoration: BoxDecoration(
-                  color: Color(0xffB98959),
+                  color: Color(0xffE5E5E5),
                   ),
               child: TabBarView(
                 children:
