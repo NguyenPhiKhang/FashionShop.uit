@@ -20,7 +20,14 @@ class ProductCard extends StatelessWidget {
         backgroundBlendMode: BlendMode.colorBurn,
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-
+//        boxShadow: [
+//          BoxShadow(
+//            color: Colors.black.withOpacity(0.5),
+//            spreadRadius: 5,
+//            blurRadius: 7,
+//            offset: Offset(0, 3),
+//          ),
+//        ],
       ),
       child: Column(
         children: <Widget>[
@@ -34,13 +41,17 @@ class ProductCard extends StatelessWidget {
               )
 
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8)),
+              color: Colors.white,),
+
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 2),
+                padding: EdgeInsets.all(10),
                 child: Container(
+
                   width: 170,
                   height: 120,
                   child: Column(

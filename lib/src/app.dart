@@ -16,15 +16,18 @@ import 'package:fashionshop/src/resources/Filter_Screen.dart';
 import 'package:fashionshop/src/resources/HomePage.dart';
 import 'package:fashionshop/src/resources/HomeScreen.dart';
 import 'package:fashionshop/src/resources/LoginScreen.dart';
+import 'package:fashionshop/src/resources/MyOrder_Screen.dart';
 
 import 'package:fashionshop/src/resources/ProductScreen.dart';
 import 'package:fashionshop/src/resources/ProductWithCatLv3_Screen.dart';
 import 'package:fashionshop/src/resources/RegisterScreen.dart';
+import 'package:fashionshop/src/resources/SearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'bloc/ProductBloc/ProductBloc.dart';
+import 'bloc/SearchBloc/SearchBloc.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
@@ -56,7 +59,16 @@ class MyApp extends StatelessWidget {
                 900: const Color(0xFF5BBABB),
               }),
           ),
-          home:   LoginScreen()
+          home: LoginScreen()
+//          BlocProvider<SearchBloc>(
+//                  create: (context){
+//            return SearchBloc(
+//
+//            );
+//            },
+//                child:SearchScreen()
+//            )
+                // LoginScreen()
 //          BlocProvider<CategoryBloc>(
 //                  create: (context){
 //            return CategoryBloc(

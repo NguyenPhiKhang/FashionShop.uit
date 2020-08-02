@@ -4,11 +4,15 @@ import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
+import 'package:fashionshop/src/bloc/ProductDetailBloc/ProductDetailBloc.dart';
+import 'package:fashionshop/src/bloc/ProductDetailBloc/ProductDetailEvent.dart';
+import 'package:fashionshop/src/bloc/SearchBloc/SearchBloc.dart';
 import 'package:fashionshop/src/model/Category.dart';
 import 'package:fashionshop/src/model/Filter.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:fashionshop/src/resources/Filter_Screen.dart';
 import 'package:fashionshop/src/resources/ProductScreen.dart';
+import 'package:fashionshop/src/resources/SearchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +31,7 @@ void _onWidgetDidBuild(Function() callback) {
   });
 }
 class ProductWithCatLv3_Screen extends StatefulWidget {
+
   final String title;
   final CategoryLevel2 categoryLevel2;
   ProductWithCatLv3_Screen({@required this.title,@required this.categoryLevel2});
@@ -38,6 +43,7 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
   ScrollController _scrollController= ScrollController();
   ScrollController _scrollController2=ScrollController();
   bool flag =true;
+  String value ="Giá: Không sắp xếp";
 
 
 
@@ -46,13 +52,12 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
   {
     super.initState();
 
+
       _scrollController2.addListener(() {
         if(_scrollController2.position.pixels==_scrollController2.position.maxScrollExtent)
           setState(() {
             flag =false;
           });
-
-
 
       });
       _scrollController.addListener(() {
@@ -63,9 +68,19 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
             flag =true;
 
           });
-
-
         }
+        if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
+          {
+            if(context.bloc<ProductBloc>().state.filterRules!=null)
+              {
+                context.bloc<ProductBloc>().add(
+                    ProductGetMoreDataByCategoryCodeEvent(
+                        filter: context.bloc<ProductBloc>().state.filterRules));
+              }
+            else
+              context.bloc<ProductBloc>().add(ProductByCategoryCodeEvent(
+                  category_code: widget.categoryLevel2.level_code));
+          }
 
 
       });
@@ -76,30 +91,10 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
 
     return  BlocBuilder<ProductBloc,ProductsState>(
         builder:(context,state) {
-          if(state.filterRules!=null)
-            {
-
-
-
-                _scrollController.addListener(() {
-                  if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
-
-                      context.bloc<ProductBloc>().add(ProductGetMoreDataByCategoryCodeEvent(filter: state.filterRules));
-
-
-                });
-            }
-          else   _scrollController.addListener(() {
-            if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
-
-              context.bloc<ProductBloc>().add(ProductByCategoryCodeEvent(category_code: widget.categoryLevel2.level_code));
-
-
-          });
 
 
           return Scaffold(
-            backgroundColor: Color(0xffE5E5E5),
+            backgroundColor: Colors.white,
             appBar: AppBar(
               title: Center(child: Text(widget.title)),
               backgroundColor: Color(0xFF4ab3b5),
@@ -112,7 +107,20 @@ class _ProductWithCatLv3_ScreenState extends State<ProductWithCatLv3_Screen> {
 
               actions: <Widget>[
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(
+                        builder: (context)=>   BlocProvider<SearchBloc>(
+                            create: (context){
+                              return SearchBloc(
+
+                              );
+                            },
+                            child:SearchScreen()
+                        )
+                    )
+
+                    );
+                  },
                   icon: Icon(Icons.search, color: Colors.white, size: 30,),
 
                 ),
@@ -264,8 +272,8 @@ controller: _scrollController2,
                          color: Colors.white,
                       height: 50,
                       width:MediaQuery.of(context).size.width ,
-                      padding: EdgeInsets.only(top: 10,bottom: 10),
-                      margin: EdgeInsets.only(top:10,left:0,bottom: 10),
+                      padding: EdgeInsets.only(top: 7,bottom: 7),
+                      //margin: EdgeInsets.only(top:10,left:0,bottom: 10),
                       child: Column(
                         children: <Widget>[
 
@@ -273,7 +281,7 @@ controller: _scrollController2,
                             children: <Widget>[
                               Center(
                                 child: Container(
-                                    height: 30,
+                                    height: 36,
                                     width:MediaQuery.of(context).size.width,
 
                                     child: ListView.builder(
@@ -286,10 +294,19 @@ controller: _scrollController2,
 
                                                   height: 20,
                                                   width: 100,
-                                                  margin: index!=0?EdgeInsets.only(left: 10):EdgeInsets.only(left: 0),
+                                                  margin: index!=0?EdgeInsets.only(left: 10,top: 3,bottom: 3):EdgeInsets.only(left: 0,top:3 , bottom: 3),
                                                   padding: EdgeInsets.only(left: 5,right: 5),
                                                   decoration: BoxDecoration(color:Color(0xff222222),
-                                                    borderRadius: BorderRadius.circular(16)
+                                                    borderRadius: BorderRadius.circular(16),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black.withOpacity(0.5),
+                                                        spreadRadius: 1,
+                                                        blurRadius: 3,
+                                                        offset: Offset(0, 0), // changes position of shadow
+                                                      ),
+                                                    ],
+
                                                   ),
                                                   child: Center(child: Text(category.name,style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.w700),textAlign: TextAlign.center,))
 
@@ -332,7 +349,15 @@ controller: _scrollController2,
                   Container(
                     margin: EdgeInsets.only(bottom: 5,top: 5),
                     height: 30,
-                    decoration: BoxDecoration(color: Colors.white,border: Border.all(color: Colors.grey.withOpacity(0.5))),
+                    decoration: BoxDecoration(color: Colors.white,border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],),
 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -355,24 +380,45 @@ controller: _scrollController2,
                         Container(
                           child: GestureDetector(
                             child: FlatButton.icon(onPressed: () {
-                              showModalBottomSheet(context: context,
+                              showModalBottomSheet(
+                                  context: context,
                                   builder: (_) {
-                                    return Column(
+                                    return  Column(
                                       children: <Widget>[
                                         ListTile(
                                           title: Text("Giá: Cao -> Thấp"),
-                                          onTap: () {},
+                                          onTap: () {
+
+                                            value ="Giá: Cao -> Thấp";
+                                            context.bloc<ProductBloc>().add(FilterandSortByEvent(SortBy: -1,level_code: widget.categoryLevel2.level_code));
+                                            Navigator.pop(context);
+                                            // context.bloc<ProductBloc>().add(ProductGetMoreDataEvent());
+
+
+                                          },
                                         ),
                                         ListTile(
                                           title: Text("Giá: Thấp -> Cao"),
                                           onTap: () {
 
+                                              value ="Giá: Thấp -> Cao";
+                                              context.bloc<ProductBloc>().add(FilterandSortByEvent(SortBy: 1,level_code: widget.categoryLevel2.level_code));
+                                              Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          title: Text("Giá: Không sắp xếp"),
+                                          onTap: () {
+
+                                              value ="Giá: Không sắp xếp";
+                                              context.bloc<ProductBloc>().add(FilterandSortByEvent(SortBy: 0,level_code: widget.categoryLevel2.level_code));
+                                              Navigator.pop(context);
+
                                           },
                                         )
                                       ],
                                     );
-                                  }
-                              );
+                                  });
                             },
                                 icon: Icon(
                                   Icons.import_export, color: Colors.black,),
@@ -395,65 +441,100 @@ controller: _scrollController2,
 
 
 
-                  state.data.length!=0?Container(
-                    height: MediaQuery.of(context).size.height-150,
-                     color: Color(0xffE5E5E5),
-                    margin: EdgeInsets.only(left: 10),
-                    child: CustomScrollView (
-                      shrinkWrap: true,
-                      primary: false,
-                        physics: flag==true? NeverScrollableScrollPhysics(): ClampingScrollPhysics(),
-                        controller: _scrollController,
-                        scrollDirection: Axis.vertical,
-                        slivers: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      if  (state is Loading)
+                        Positioned(
+                          bottom: 10,left: MediaQuery.of(context).size.width/2-15,
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            child:
+                            CircularProgressIndicator(backgroundColor: Colors.red,) ,
+                          ),
+                        ),
+                      state.data.length!=0?Container(
+                        height: MediaQuery.of(context).size.height-150,
+                         color: Colors.white,
+
+                        child: CustomScrollView (
+                          shrinkWrap: true,
+                          primary: false,
+                            physics: flag==true? NeverScrollableScrollPhysics(): ClampingScrollPhysics(),
+                            controller: _scrollController,
+                            scrollDirection: Axis.vertical,
+                            slivers: <Widget>[
 
 
-                          SliverGrid(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              SliverGrid(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
 
-                              crossAxisCount: 2,
-                              childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+15),
-                              //mainAxisSpacing: 4.0,
-                              //childAspectRatio: AppSizes.tile_width / AppSizes.tile_height,
-                            ),
-                            delegate: SliverChildBuilderDelegate(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+15),
+                                  //mainAxisSpacing: 4.0,
+                                  //childAspectRatio: AppSizes.tile_width / AppSizes.tile_height,
+                                ),
+                                delegate: SliverChildBuilderDelegate(
 
 
-                                  (BuildContext context, int index) {
+                                      (BuildContext context, int index) {
 
-                                return Container(
-                                  margin: EdgeInsets.only(top: 10,right: 10),
-                                  color: Colors.white.withOpacity(0),
-                                  //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                                  child:GestureDetector(
-                                      child: Container(
+                                    return Container(
+                                      margin:
+                                      EdgeInsets.only(top: 10, ),
+                                      padding: EdgeInsets.only(left: 10,bottom: 8,right:10),
+                                      color: Colors.white.withOpacity(0),
+                                      //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                      child:GestureDetector(
+                                          child: Container(
 
-                                        height: MediaQuery.of(context).size.height/3+10,
-                                        decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,borderRadius: BorderRadius.circular(0),border: Border.all(color: Colors.white)),
-                                        child:
-                                        ProductCard(product: state.data[index],index: index,),
+                                            height: MediaQuery.of(context).size.height/3+10,
+                                            decoration: BoxDecoration(color: Colors.white,backgroundBlendMode: BlendMode.colorBurn,borderRadius: BorderRadius.circular(8),border: Border.all(color: Colors.white),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey.withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 4,
+                                                  offset: Offset(0, 0), // changes position of shadow
+                                                ),
+                                              ],),
+                                            child:
+                                            ProductCard(product: state.data[index],index: index,),
+
+                                          ),
+                                          onTap: (){
+                                            print(context.bloc<LoginBloc>().id);
+                                    Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BlocProvider<ProductDetailBloc>(
+                                                            create: (context){
+                                                              return ProductDetailBloc(
+
+                                                              )..add(ProductDetailLoadEvent(id: state.data[index].id,person_id: context.bloc<LoginBloc>().id));
+                                                            },
+                                                            child: Product_Detail()
+                                                        )
+                                                ));
+                                          }
 
                                       ),
-                                      onTap: (){
-                                 Navigator.push(context,MaterialPageRoute(
-                                          builder: (context)=> Product_Detail(product: state.data[index],index: index,email: context.bloc<LoginBloc>().getEmail,)
-                                      )
-                                      );
-                                      }
+                                    );
+                                  },
+                                  childCount: state.data.length,
 
-                                  ),
-                                );
-                              },
-                              childCount: state.data.length,
+                                ),
 
-                            ),
+                              ),
+                            ]
+                        ),
+                      ):Container(
+          child: Center(child: Text("Không có dữ liệu nào trùng khớp.",style: TextStyle(fontSize: 14,color: Colors.black),),),
+          ),
 
-                          ),
-                        ]
-                    ),
-                  ):Container(
-                    child: Center(child: Text("Không có dữ liệu nào trùng khớp.",style: TextStyle(fontSize: 14,color: Colors.black),),),
-                  ),
+                    ],
+                  )
 
                 ],
               ),

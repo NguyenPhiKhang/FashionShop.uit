@@ -6,11 +6,16 @@ import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductEvent.dart';
 import 'package:fashionshop/src/bloc/ProductBloc/ProductState.dart';
+import 'package:fashionshop/src/bloc/ProductDetailBloc/ProductDetailBloc.dart';
+import 'package:fashionshop/src/bloc/ProductDetailBloc/ProductDetailEvent.dart';
+import 'package:fashionshop/src/bloc/SearchBloc/SearchBloc.dart';
 import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
 import 'package:fashionshop/src/graphql/QueryMutation.dart';
 import 'package:fashionshop/src/model/Product.dart';
+import 'package:fashionshop/src/model/ProductDetail.dart';
 import 'package:fashionshop/src/resources/ExploreScreen.dart';
 import 'package:fashionshop/src/resources/Filter_Screen.dart';
+import 'package:fashionshop/src/resources/SearchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -74,12 +79,16 @@ class _HomePageState extends State<HomePage> {
   @override
   int _current = 0;
   String value="Giá: Không sắp xếp";
-
+bool addmore=false;
   List imgList = [
-    'https://www.pano-verschluss.com/wp-content/uploads/2018/09/10384456_998450296913710_7463963190715079729_n.jpg',
-    'https://www.pano-verschluss.com/wp-content/uploads/2018/09/10384456_998450296913710_7463963190715079729_n.jpg',
-    'https://www.pano-verschluss.com/wp-content/uploads/2018/09/10384456_998450296913710_7463963190715079729_n.jpg',
-    'https://www.pano-verschluss.com/wp-content/uploads/2018/09/10384456_998450296913710_7463963190715079729_n.jpg'
+
+    'https://4menshop.com/images/thumbs/2019/08/ao-vest-nazafu-xam-chuot-dam-1113_small-10927-t.JPG',
+    'https://i.pinimg.com/736x/fc/3d/92/fc3d92400afbd0ebca88983fff9c0330.jpg',
+    'https://photo-1-baomoi.zadn.vn/w1000_r1/2019_10_05_180_32445904/7f4a33e686a66ff836b7.jpg',
+    'https://kenh14cdn.com/2018/6/6/6-1528280187496101950853.jpeg',
+    'https://graphicgoogle.com/wp-content/uploads/2017/10/Facebook-Fashion-Big-Sale-Banner.jpg'
+
+
   ];
 
   CarouselSlider carouselSlider;
@@ -111,47 +120,78 @@ class _HomePageState extends State<HomePage> {
       if (_scrollController.position.pixels ==
           _scrollController.position.minScrollExtent) {
         setState(() {
+
           flag = true;
+          print(flag);
         });
       }
-
+//
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent)
-        context.bloc<ProductBloc>().add(ProductGetMoreDataEvent());
+        {
+          context.bloc<ProductBloc>().add(ProductGetMoreDataEvent());
+        }
     });
   }
 
   Widget build(BuildContext context) {
     return BlocBuilder<ProductBloc, ProductsState>(builder: (context, state) {
+
       return BlocBuilder<CategoryBloc, CategoryState>(
           builder: (context, state2) {
 
-            if (state2 != InitialState())
+            if (state2 != InitialState()) {
               return Scaffold(
           appBar: AppBar(
-            title: Center(child: Text("Home Screen")),
+            title: Center(child: Text("Home Screen",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: "Arial"),)),
             backgroundColor: Color(0xFF4ab3b5),
             elevation: 0.1,
+            leading: Container(
+              height: 40,
+                width: 40,
+                decoration: BoxDecoration(shape: BoxShape.circle),
+                child: Center(
+                  child: Image.asset(
+                    'assets/fashion_logo.png',
+                    width: 30,
+                    fit: BoxFit.fill,
+                    color: Colors.white,
+                  ),
+                )),
             actions: <Widget>[
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,MaterialPageRoute(
+                      builder: (context)=>   Hero(
+                        tag: 'herotag2',
+                        child: BlocProvider<SearchBloc>(
+                            create: (context){
+                              return SearchBloc(
+
+                              );
+                            },
+                            child:SearchScreen()
+                        ),
+                      )
+                      )
+
+                  );
+
+                },
+                child: Icon(
                   Icons.search,
-                  color: Colors.white,
+                  color: Colors.white,size: 30,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-              ),
+
+
             ],
           ),
+          backgroundColor: Colors.white,
           body: Container(
             decoration: BoxDecoration(
-                color: Color(0xffE7E7E7),
+//                color: Color(0xffE7E7E7),
+            color:  Colors.white,
                 backgroundBlendMode: BlendMode.colorBurn),
             child: SingleChildScrollView(
               controller: _scrollController2,
@@ -218,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     color: Colors.white,
-                    margin: EdgeInsets.only(left: 10, right: 5),
+                    padding: EdgeInsets.only(left: 10, right: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -290,13 +330,23 @@ class _HomePageState extends State<HomePage> {
                                             width: 70,
                                             height: 100,
                                             margin: index!=0? EdgeInsets.only(top:5,bottom: 5,left:10):EdgeInsets.only(top:5,bottom: 5),
-                                            decoration: BoxDecoration(),
+                                            decoration: BoxDecoration(
+
+                                            ),
                                               child: Column(
                                                 children: <Widget>[
                                                   Container(
                                                     height: 50,
                                                     width: 50,
-                                                    decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.white,border: Border.all(color: Colors.grey.withOpacity(0.3))),
+                                                    decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.white,border: Border.all(color: Colors.grey.withOpacity(0.3)),
+                                                      boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.blue.withOpacity(0.3),
+                                                        spreadRadius: 1,
+                                                        blurRadius: 4,
+                                                        offset: Offset(0, 0), // changes position of shadow
+                                                      ),
+                                                    ],),
                                                     child: Center(child:ClipRRect(
                                                       borderRadius: BorderRadius.circular(25),
                                                       child: Image.network(category.icon !=null?"https://fashionshopuit-server.azurewebsites.net/image/"+category.icon : "https://i.pinimg.com/236x/30/87/8d/30878dc76c22265aa23b6c0328886113.jpg" ,fit: BoxFit.fill,
@@ -349,16 +399,26 @@ class _HomePageState extends State<HomePage> {
                       ),
 
                   SizedBox(
-                    height: 20.0,
+                    height: 15.0,
                   ),
 
                   Container(
-                    margin: EdgeInsets.only(right: 2,left:2),
-                    height: 30,
+                    margin: EdgeInsets.only(right: 2,left:2,bottom: 5),
+                    padding:EdgeInsets.only(bottom:4 ),
+                    height: 35,
 
                     decoration: BoxDecoration(
                         color: Colors.white,
-                      border: Border.all(color:Colors.grey.withOpacity(0.5))
+                      border: Border.all(color:Colors.grey.withOpacity(0.5),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -390,6 +450,7 @@ class _HomePageState extends State<HomePage> {
 //                          },
 //                        ),
                         Container(
+                          height: 30,
 
                           child: GestureDetector(
                             child: FlatButton.icon(
@@ -405,6 +466,7 @@ class _HomePageState extends State<HomePage> {
                                               onTap: () {
 
                                                   value ="Giá: Cao -> Thấp";
+                                                  context.bloc<ProductBloc>().add(ProductLoadEvent(SortBy: -1));
                                                   Navigator.pop(context);
                                                  // context.bloc<ProductBloc>().add(ProductGetMoreDataEvent());
 
@@ -414,17 +476,19 @@ class _HomePageState extends State<HomePage> {
                                             ListTile(
                                               title: Text("Giá: Thấp -> Cao"),
                                               onTap: () {
-                                                setState(() {
+
                                                   value ="Giá: Thấp -> Cao";
-                                                });
+                                                  context.bloc<ProductBloc>().add(ProductLoadEvent(SortBy: 1));
+                                                  Navigator.pop(context);
                                               },
                                             ),
                                             ListTile(
                                               title: Text("Giá: Không sắp xếp"),
                                               onTap: () {
-                                                setState(() {
+
                                                   value ="Giá: Không sắp xếp";
-                                                });
+                                                  context.bloc<ProductBloc>().add(ProductLoadEvent(SortBy: 0));
+                                                  Navigator.pop(context);
                                               },
                                             )
                                           ],
@@ -443,9 +507,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Stack(
+
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(left: 10),
+                        //margin: EdgeInsets.only(left: 5),
+                        color: Colors.white,
+
                         height: MediaQuery.of(context).size.height - 180,
                         child: CustomScrollView(
                             shrinkWrap: true,
@@ -474,8 +541,13 @@ class _HomePageState extends State<HomePage> {
                                   (BuildContext context, int index) {
                                     return Container(
                                       margin:
-                                          EdgeInsets.only(top: 10, right: 10),
-                                      color: Colors.white.withOpacity(0),
+                                          EdgeInsets.only(top: 10, ),
+                                      padding: EdgeInsets.only(left: 10,bottom: 8,right:10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+
                                       //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                       child: GestureDetector(
                                           child: Container(
@@ -492,9 +564,17 @@ class _HomePageState extends State<HomePage> {
                                                   BorderRadius.circular(8),
                                               border: Border.all(
                                                   color: Colors.white),
+                                              boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey.withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 4,
+                                                offset: Offset(0, 0), // changes position of shadow
+                                              ),
+                                            ],
 //                                             boxShadow: [
 //                                               BoxShadow(
-//                                                 color: Colors.grey.withOpacity(0.5),
+//                                                 color: Colors.black.withOpacity(0.5),
 //                                                 spreadRadius: 5,
 //                                                 blurRadius: 7,
 //                                                 offset: Offset(0, 3),
@@ -513,14 +593,15 @@ class _HomePageState extends State<HomePage> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Product_Detail(
-                                                          product:
-                                                              state.data[index],
-                                                          index: index,
-                                                          email: context
-                                                              .bloc<LoginBloc>()
-                                                              .getEmail,
-                                                        )));
+                                                        BlocProvider<ProductDetailBloc>(
+                                                            create: (context){
+                                                              return ProductDetailBloc(
+
+                                                              )..add(ProductDetailLoadEvent(id: state.data[index].id,person_id: context.bloc<LoginBloc>().id));
+                                                            },
+                                                            child: Product_Detail()
+                                                        )
+                                                ));
                                           }),
                                     );
                                   },
@@ -529,13 +610,26 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ]),
                       ),
+                      if  (state is Loading)
+                        Positioned(
+                          bottom: 10,left: MediaQuery.of(context).size.width/2-15,
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            child:
+                            CircularProgressIndicator(backgroundColor: Colors.red,) ,
+                          ),
+                        )
                     ],
+
                   ),
                 ],
               ),
+
             ),
           ),
         );
+            }
             return Center(child: CircularProgressIndicator());
       });
     });

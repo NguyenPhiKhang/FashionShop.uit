@@ -25,9 +25,10 @@ class _Products_ScreenState extends State<Products_Screen> {
   {
     super.initState();
     _scrollController.addListener(() {
-      if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent)
-        context.bloc<ProductBloc>().add(ProductByCategoryCodeEvent(category_code: widget.level_code));
-
+      if(_scrollController.position.pixels==_scrollController.position.maxScrollExtent) {
+        context.bloc<ProductBloc>().add(
+            ProductByCategoryCodeEvent(category_code: widget.level_code));
+      }
     });
 
   }
@@ -109,43 +110,72 @@ class _Products_ScreenState extends State<Products_Screen> {
                        ],
                      ),
                    ),
-                   Container(
-                     margin: EdgeInsets.only(left:10),
-                     height: MediaQuery.of(context).size.height-150,
-                     child: CustomScrollView(
-                           controller: _scrollController,
-                         scrollDirection: Axis.vertical,
-                         slivers: <Widget>[
-                           SliverGrid(
-                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                   Stack(
+                     children: <Widget>[
+                       Container(
+                         //margin: EdgeInsets.only(left: 5),
+                         color: Colors.white,
 
-                               crossAxisCount: 2,
-                               childAspectRatio: (MediaQuery.of(context).size.width/2-40)/(MediaQuery.of(context).size.height/3+15),
-                               mainAxisSpacing: 0.0,
-                               crossAxisSpacing: 0.0,
-                               //childAspectRatio: AppSizes.tile_width / AppSizes.tile_height,
-                             ),
-                             delegate: SliverChildBuilderDelegate(
+                         height: MediaQuery.of(context).size.height - 180,
+                         child: CustomScrollView(
+                             shrinkWrap: true,
+                             primary: false,
 
+                             controller: _scrollController,
+                             scrollDirection: Axis.vertical,
+                             slivers: <Widget>[
+                               SliverGrid(
+                                 gridDelegate:
+                                 SliverGridDelegateWithFixedCrossAxisCount(
+                                   crossAxisCount: 2,
+                                   childAspectRatio:
+                                   (MediaQuery.of(context).size.width / 2 -
+                                       40) /
+                                       (MediaQuery.of(context).size.height /
+                                           3 +
+                                           15),
+                                   mainAxisSpacing: 0.0,
+                                   crossAxisSpacing: 0.0,
+                                   //childAspectRatio: AppSizes.tile_width / AppSizes.tile_height,
+                                 ),
+                                 delegate: SliverChildBuilderDelegate(
+                                       (BuildContext context, int index) {
+                                     return Container(
+                                       margin:
+                                       EdgeInsets.only(top: 10, ),
+                                       padding: EdgeInsets.only(left: 10,bottom: 8,right:10),
+                                       decoration: BoxDecoration(
+                                         color: Colors.white.withOpacity(0),
+                                         borderRadius: BorderRadius.circular(8),
+                                       ),
 
-                                   (BuildContext context, int index) {
-
-                                 return Container(
-                                   margin: EdgeInsets.only(top: 10,right: 10),
-                                   color: Colors.white.withOpacity(0),
-                                   //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                                   child:GestureDetector(
-                                       child: Container(
-
-                                         height: MediaQuery.of(context).size.height/3+20,
-                                         decoration: BoxDecoration(
-                                             color: Colors.white,
-                                             backgroundBlendMode: BlendMode.colorBurn,
-                                             borderRadius: BorderRadius.circular(8),
-                                             border: Border.all(color: Colors.white),
+                                       //padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                       child: GestureDetector(
+                                           child: Container(
+                                             height: MediaQuery.of(context)
+                                                 .size
+                                                 .height /
+                                                 3 +
+                                                 20,
+                                             decoration: BoxDecoration(
+                                               color: Colors.white,
+                                               backgroundBlendMode:
+                                               BlendMode.colorBurn,
+                                               borderRadius:
+                                               BorderRadius.circular(8),
+                                               border: Border.all(
+                                                   color: Colors.white),
+                                               boxShadow: [
+                                                 BoxShadow(
+                                                   color: Colors.grey.withOpacity(0.5),
+                                                   spreadRadius: 2,
+                                                   blurRadius: 4,
+                                                   offset: Offset(0, 0), // changes position of shadow
+                                                 ),
+                                               ],
 //                                             boxShadow: [
 //                                               BoxShadow(
-//                                                 color: Colors.grey.withOpacity(0.5),
+//                                                 color: Colors.black.withOpacity(0.5),
 //                                                 spreadRadius: 5,
 //                                                 blurRadius: 7,
 //                                                 offset: Offset(0, 3),
@@ -153,30 +183,45 @@ class _Products_ScreenState extends State<Products_Screen> {
 //
 //                                               ),
 //                                             ],
-                                         ),
-                                         child:
-                                         ProductCard(product: state.data[index],index: index,),
-
-                                       ),
-                                       onTap: (){
-                                         Navigator.push(context,MaterialPageRoute(
-                                             builder: (context)=> Product_Detail(product: state.data[index],index: index,email: context.bloc<LoginBloc>().getEmail,)
-                                         )
-                                         );
-
-
-                                       }
-
-                                   ),
-                                 );
-                               },
-                               childCount: state.data.length,
-
-                             ),
-
+                                             ),
+                                             child: ProductCard(
+                                               product: state.data[index],
+                                               index: index,
+                                             ),
+                                           ),
+                                           onTap: () {
+//                                             Navigator.push(
+//                                                 context,
+//                                                 MaterialPageRoute(
+//                                                     builder: (context) =>
+//                                                         Product_Detail(
+//                                                           product:
+//                                                           state.data[index],
+//                                                           index: index,
+//                                                           email: context
+//                                                               .bloc<LoginBloc>()
+//                                                               .getEmail,
+//                                                         )));
+                                           }),
+                                     );
+                                   },
+                                   childCount: state.data.length,
+                                 ),
+                               ),
+                             ]),
+                       ),
+                       if  (state is Loading)
+                         Positioned(
+                           bottom: 10,left: MediaQuery.of(context).size.width/2-15,
+                           child: Container(
+                             width: 30,
+                             height: 30,
+                             child:
+                             CircularProgressIndicator(backgroundColor: Colors.red,) ,
                            ),
-                         ]
-                     ),
+                         )
+                     ],
+
                    ),
                  ],
                ),

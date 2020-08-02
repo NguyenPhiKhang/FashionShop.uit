@@ -126,3 +126,35 @@ class Loading extends ProductsState {
     );
   }
 }
+
+
+
+class Initial extends ProductsState {
+  Initial({
+    List<Product> data,
+    int sortBy,
+    Filter filterRules,
+    String error,
+  }) : super(
+      data: data, sortBy: sortBy, filterRules: filterRules, error: error);
+
+  Initial getTiles() {
+    return Initial(
+        data: data, sortBy: sortBy, filterRules: filterRules);
+  }
+
+  @override
+  Initial copyWith({
+    List<Product> data,
+    int sortBy,
+    Filter filterRules,
+    String error,
+  }) {
+    return Initial(
+      data: data ?? this.data,
+      filterRules: filterRules ?? this.filterRules,
+      sortBy: sortBy ?? this.sortBy,
+      error: error,
+    );
+  }
+}

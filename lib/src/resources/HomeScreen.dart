@@ -1,7 +1,11 @@
 
 
+import 'package:fashionshop/src/bloc/CartBloc/CartBloc.dart';
+import 'package:fashionshop/src/bloc/CartBloc/CartEvent.dart';
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryBloc.dart';
 import 'package:fashionshop/src/bloc/CategoryBloc/CategoryEvent.dart';
+import 'package:fashionshop/src/bloc/FavoriteBloc/FavoriteBloc.dart';
+import 'package:fashionshop/src/bloc/FavoriteBloc/FavoriteEvent.dart';
 import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
 
 import 'package:fashionshop/src/bloc/ProductBloc/ProductBloc.dart';
@@ -10,7 +14,9 @@ import 'package:fashionshop/src/graphql/QueryMutation.dart';
 import 'package:fashionshop/src/model/Category.dart';
 
 import 'package:fashionshop/src/resources/ChatRoom.dart';
+import 'package:fashionshop/src/resources/FavoriteScreen.dart';
 import 'package:fashionshop/src/resources/HomePage.dart';
+import 'package:fashionshop/src/resources/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
           create: (context){
             return ProductBloc(
 
-            )..add(ProductGetMoreDataEvent());
+            )..add(ProductLoadEvent());
           },
           child:BlocProvider<CategoryBloc>(
               create: (context) {
@@ -59,10 +65,23 @@ class _HomeScreenState extends State<HomeScreen> {
           //HomePage()
       )
       ,
-      CartScreen(email: context.bloc<LoginBloc>().getEmail),
+      BlocProvider<CartBloc>(
+              create: (context) {
+                return CartBloc()
+                  ..add(GetCartEvent(person_id: context.bloc<LoginBloc>().getid));
+              },
+              child: CartScreen(person_id: context.bloc<LoginBloc>().getid))
+        //HomePage()
+
+        ,
       ChatRoom(MyName: widget.Myname),
-      Center(child: Text("Your Favorite"),),
-      Center(child: Text("Your Profile"),),
+      BlocProvider<FavoriteBloc>(
+          create: (context) {
+            return FavoriteBloc()
+              ..add(FavoriteLoadEvent(person_id: context.bloc<LoginBloc>().getid));
+          },
+          child: FavoriteScreen()),
+      ProfileScreen(),
 
 
     ];

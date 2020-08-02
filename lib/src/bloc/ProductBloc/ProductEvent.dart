@@ -12,7 +12,9 @@ abstract class ProductEvent extends Equatable {
 class ProductLoadEvent extends ProductEvent {
 
 
+final int SortBy;
 
+  ProductLoadEvent({this.SortBy});
 
   @override
   List<Object> get props => [];
@@ -24,7 +26,9 @@ class ProductLoadEvent extends ProductEvent {
 
 class ProductGetMoreDataEvent extends ProductEvent {
 
+  final int SortBy;
 
+  ProductGetMoreDataEvent({this.SortBy});
 
 
   @override
@@ -52,7 +56,8 @@ class ProductGetMoreDataByCategoryCodeEvent extends ProductEvent {
 
   final int SortBy;
   final Filter filter;
-  const ProductGetMoreDataByCategoryCodeEvent({this.SortBy,this.filter});
+  final int level_code;
+  const ProductGetMoreDataByCategoryCodeEvent({this.SortBy,this.filter,this.level_code});
   @override
   List<Object> get props => [SortBy,Filter];
 
@@ -66,7 +71,8 @@ class FilterandSortByEvent extends ProductEvent {
 
   final int SortBy;
   final Filter filter;
-  const FilterandSortByEvent({this.SortBy,this.filter});
+  final int level_code;
+  const FilterandSortByEvent({this.SortBy,this.filter,this.level_code});
 
 
   @override

@@ -65,17 +65,26 @@ class Explore_TabPage extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 4,
+                  offset: Offset(0, 0), // changes position of shadow
+                ),
+              ],
+            ),
 
 
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
 
             child: Row(
               children: <Widget>[
                 Container(width: MediaQuery
                     .of(context)
                     .size
-                    .width - 20,
+                    .width - 40,
                   height: MediaQuery
                       .of(context)
                       .size
@@ -99,14 +108,21 @@ class Explore_TabPage extends StatelessWidget {
                         width: (MediaQuery
                             .of(context)
                             .size
-                            .width - 20)/2,
+                            .width - 42)/2,
                         child: Center(
                           child: Text(categoryLevel1.listSub_cat[i].name,
                             style: TextStyle(fontSize: 20,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.black),textAlign: TextAlign.left,),),
+                                color: Colors.black),textAlign: TextAlign.center,),),
                       ),
-
+                      Container(
+                        height:MediaQuery
+                            .of(context)
+                            .size
+                            .height *0.7/ 5,
+                        width: 2,
+                        color: Colors.blueGrey,
+                      ),
                       ClipRRect(
                         borderRadius: BorderRadius.only(topRight: Radius.circular(8),bottomRight: Radius.circular(8)),
                             child: Image.network(
@@ -118,7 +134,7 @@ class Explore_TabPage extends StatelessWidget {
                               width: (MediaQuery
                                   .of(context)
                                   .size
-                                  .width - 20)/2,
+                                  .width - 42)/2,
                               fit: BoxFit.fill,)
                         ),
 
@@ -157,7 +173,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             home: DefaultTabController(
           length: context.bloc<CategoryBloc>().list_cat_1.length,
           child: Scaffold(
-            backgroundColor: Color(0xffE7E7E7),
+            backgroundColor: Colors.white,
             appBar: AppBar(
               leading: GestureDetector(
                 onTap: () {
@@ -199,7 +215,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             ),
             body: Container(
               decoration: BoxDecoration(
-                  color: Color(0xffE5E5E5),
+                  color: Colors.white,
                   ),
               child: TabBarView(
                 children:
