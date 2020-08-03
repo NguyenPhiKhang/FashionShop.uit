@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'dart:io' show Platform;
 
 class Product_Detail extends StatefulWidget {
   @override
@@ -116,7 +117,7 @@ class _Product_DetailState extends State<Product_Detail> {
           color: Colors.white,
           child: Column(children: <Widget>[
             Container(
-              height: MediaQuery.of(context).size.height - 120,
+              height: MediaQuery.of(context).size.height - (Platform.isAndroid?120:150),
               decoration: BoxDecoration(
                 color: Colors.white,
               ),

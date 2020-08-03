@@ -44,65 +44,81 @@ Fashion Shop APP
 -	Quản lý các đơn hàng người dùng lựa chọn
 -	Quản lý các đơn hàng khuyến mãi nổi lên trang đầu
 
-
-Screen Shot 2020-07-07 at 09.55.08.png
-update
-1 minute ago
-Screen Shot 2020-07-07 at 09.55.38.png
-update
-1 minute ago
-Screen Shot 2020-07-07 at 09.56.18.png
-update
-1 minute ago
-Screen Shot 2020-07-07 at 09.57.08.png
-update
-1 minute ago
-Screen Shot 2020-07-07 at 09.57.26.png
-update
-1 minute ago
-Screen Shot 2020-07-07 at 09.57.45.png
-update
-
-
 ## ✨ Screenshots
 <table style="width:100%">
 <tr>
     <th width=300> <p align="center">
       <p>Trang Chủ</p>
-       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.55.38.png"
+       <img src="./ScreenShot/trangchu.png"
             width="200" height="400"><br>
       </p>
   </th>
     <th width=300> <p align="center">
        <p>Đăng Nhập</p>
-       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.55.08.png"
+       <img src="./ScreenShot/dangnhap.png"
              width="200" height="400"><br>
   </p>
   </th>
   <th width=300> <p align="center">
        <p>Chat</p>
-       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.56.18.png"  width="200" height="400"><br>
+       <img src="./ScreenShot/chat.png"  width="200" height="400"><br>
       </p>
   </th>
 </tr>
 <tr>
     <th  width=300> <p align="center">
       <p>Danh mục 1</p>
-       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.57.08.png"
+       <img src="./ScreenShot/danhmuc1.png"
             width="200" height="400"><br>
       </p>
   </th>
     <th width=300> <p align="center">
        <p>Danh mục 2</p>
-       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.57.26.png"
+       <img src="./ScreenShot/danhmuc2.png"
              width="200" height="400"><br>
   </p>
   </th>
   <th width=300> <p align="center">
-       <p>anh mục 3</p>
-       <img src="./ScreenShot/Screen Shot 2020-07-07 at 09.57.45.png"  width="200" height="400"><br>
+       <p>Danh mục 3</p>
+       <img src="./ScreenShot/danhmuc3.png"  width="200" height="400"><br>
       </p>
   </tr>
+  <tr>
+      <th  width=300> <p align="center">
+        <p>Chi tiết sản phẩm</p>
+         <img src="./ScreenShot/chitiet.png"
+              width="200" height="400"><br>
+        </p>
+    </th>
+      <th width=300> <p align="center">
+         <p>Giỏ hàng</p>
+         <img src="./ScreenShot/giohang.png"
+               width="200" height="400"><br>
+    </p>
+    </th>
+    <th width=300> <p align="center">
+         <p>Profile</p>
+         <img src="./ScreenShot/profile.png"  width="200" height="400"><br>
+        </p>
+    </tr>
+    <tr>
+        <th  width=300> <p align="center">
+          <p>Lọc</p>
+           <img src="./ScreenShot/filter.png"
+                width="200" height="400"><br>
+          </p>
+      </th>
+        <th width=300> <p align="center">
+           <p>Yêu thích</p>
+           <img src="./ScreenShot/yeuthich.png"
+                 width="200" height="400"><br>
+      </p>
+      </th>
+      <th width=300> <p align="center">
+           <p>Tìm kiếm</p>
+           <img src="./ScreenShot/search.png"  width="200" height="400"><br>
+          </p>
+      </tr>
 </table>
 
 

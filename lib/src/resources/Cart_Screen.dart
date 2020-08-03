@@ -14,6 +14,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:intl/intl.dart';
+import 'dart:io' show Platform;
 
 class CartScreen extends StatefulWidget {
   final String person_id;
@@ -98,7 +99,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              height: MediaQuery.of(context).size.height - 320,
+              height: MediaQuery.of(context).size.height - (Platform.isAndroid?320:360),
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,

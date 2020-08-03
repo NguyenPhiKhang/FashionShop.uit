@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
 
           Container(
-            height: MediaQuery.of(context).size.height-300-60,
+            height: MediaQuery.of(context).size.height-300-60-50,
             child: SingleChildScrollView(
 
               scrollDirection: Axis.vertical,
