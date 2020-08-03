@@ -44,6 +44,10 @@ Fashion Shop APP
 -	Quản lý các đơn hàng người dùng lựa chọn
 -	Quản lý các đơn hàng khuyến mãi nổi lên trang đầu
 
+## Server
+- NodeJS
+- GraphQL
+
 ## ✨ Screenshots
 <table style="width:100%">
 <tr>
@@ -121,6 +125,8 @@ Fashion Shop APP
       </tr>
 </table>
 
+## **API**
+* [Shop](https://github.com/sooshin/android-popular-movies-app)
 
 ### Prerequisites
 *   Android Studio 6.0+
