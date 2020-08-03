@@ -126,7 +126,7 @@ Fashion Shop APP
 </table>
 
 ## **API**
-* [Shop](https://github.com/sooshin/android-popular-movies-app)
+* [Shop](https://www.shein.com.vn/)
 
 ### Prerequisites
 *   Android Studio 6.0+
