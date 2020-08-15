@@ -1,5 +1,10 @@
+import 'package:fashionshop/src/bloc/Login_Bloc/LoginBloc.dart';
+import 'package:fashionshop/src/bloc/my_oder_bloc/my_order_bloc.dart';
+import 'package:fashionshop/src/bloc/my_oder_bloc/my_order_event.dart';
+import 'package:fashionshop/src/resources/MyOrder_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -12,16 +17,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.blue,
-            size: 30,
-          ),
-        ),
+
         backgroundColor: Color(0xFF4ab3b5),
         title: Text(
           "Profile",
@@ -57,24 +53,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                     ),
-                    onTap: (){},
+                    onTap: (){
+
+                      Navigator.push(
+                          context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              BlocProvider<MyOrderBloc>(
+                          create: (context){
+                            return MyOrderBloc(
+
+                            )..add(InitiateEvent(person_id: context.bloc<LoginBloc>().getid));
+                          },
+                          child: MyOrder_Screen()
+                      )
+                      )
+                      );
+                    },
                   ),
 
+//                  GestureDetector(
+//                    child: Container(
+//                      height: 50,
+//                      padding: EdgeInsets.only(left: 10,right: 10),
+//                      child: Row(
+//                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        crossAxisAlignment: CrossAxisAlignment.center,
+//                        children: <Widget>[
+//                          Text("Địa chỉ giao hàng",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,fontFamily: "Arial"),),
+//                          Icon(Icons.arrow_forward_ios,size: 16,color: Colors.grey,)
+//                        ],
+//                      ),
+//                    ),
+//                    onTap: (){},
+//                  ),
                   GestureDetector(
-                    child: Container(
-                      height: 50,
-                      padding: EdgeInsets.only(left: 10,right: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Địa chỉ giao hàng",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,fontFamily: "Arial"),),
-                          Icon(Icons.arrow_forward_ios,size: 16,color: Colors.grey,)
-                        ],
-                      ),
-                    ),
-                    onTap: (){},
-                  ),GestureDetector(
                     child: Container(
                       height: 50,
                       padding: EdgeInsets.only(left: 10,right: 10),
@@ -103,6 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     onTap: (){},
                   ),GestureDetector(
+
                     child: Container(
                       height: 50,
                       padding: EdgeInsets.only(left: 10,right: 10),
@@ -115,7 +129,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                     ),
-                    onTap: (){},
+                    onTap: (){
+
+                    },
                   ),
                   GestureDetector(
                     child: Container(
@@ -125,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text("Cài đặt",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,fontFamily: "Arial"),),
+                          Text("Thiết lập tài khoản",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,fontFamily: "Arial"),),
                           Icon(Icons.arrow_forward_ios,size: 16,color: Colors.grey,)
                         ],
                       ),

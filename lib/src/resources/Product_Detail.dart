@@ -8,6 +8,7 @@ import 'package:fashionshop/src/bloc/ProductDetailBloc/ProductDetailEvent.dart';
 import 'package:fashionshop/src/bloc/ProductDetailBloc/ProductDetailState.dart';
 import 'package:fashionshop/src/model/Product.dart';
 import 'package:fashionshop/src/model/ProductDetail.dart';
+import 'package:fashionshop/src/resources/ReviewAndRating_Screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -628,131 +629,142 @@ class _Product_DetailState extends State<Product_Detail> {
                       height: 10,
                       color: Colors.white54,
                     ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Top Reviews:",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
 
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(color: Color(0xffffffff)),
-                          margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                          child: Column(
+                          Text(
+                            "Top Reviews:",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          InkWell(onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ReviewScreen()
+
+                                ));
+                            }
+                          ,child: Text("See more",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.blueAccent),)),
+
+                        ],
+                      ),
+                    ),
+              Stack(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(color: Color(0xffffffff)),
+                      margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      child: Column(
+                        children: <Widget>[
+                          Column(
                             children: <Widget>[
-                              Column(
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
                                 children: <Widget>[
                                   SizedBox(
-                                    height: 20,
+                                    width: 20,
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        "Nancy",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Row(children: <Widget>[
-                                        SmoothStarRating(
-                                          allowHalfRating: true,
-                                          starCount: 5,
-                                          size: 20,
-                                          rating: 4.3,
-                                          filledIconData: Icons.star,
-                                          halfFilledIconData: Icons.star_half,
-                                          color: Colors.amber,
-                                          borderColor: Colors.grey,
-                                          spacing: 0.0,
-                                        ),
-                                        Text(
-                                          "(4.3)",
-                                        )
-                                      ]),
-                                      Container(
-                                        margin: EdgeInsets.only(right: 10),
-                                        child: Text(
-                                          "11:20:02 , 20/08/2019",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.black26,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Container(
-                                          padding: EdgeInsets.fromLTRB(
-                                              15, 15, 15, 15),
-                                          child: Text(
-                                            "Nice product and your delivery is so good. I'm very satified.",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Colors.black,
-                                            ),
-                                          )),
-                                    ],
+                                  Text(
+                                    "Nancy",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
-                              Container(
-                                  margin: EdgeInsets.fromLTRB(15, 0, 0, 15),
-                                  height: 150,
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: listImage.length,
-                                      itemBuilder: (context, index) {
-                                        String image = listImage[index];
-                                        return Padding(
-                                            padding: EdgeInsets.only(right: 20),
-                                            child: Image.network(
-                                              image,
-                                              fit: BoxFit.fill,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4,
-                                              height: 150,
-                                              colorBlendMode: BlendMode.darken,
-                                            ));
-                                      }))
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(children: <Widget>[
+                                    SmoothStarRating(
+                                      allowHalfRating: true,
+                                      starCount: 5,
+                                      size: 20,
+                                      rating: 4.3,
+                                      filledIconData: Icons.star,
+                                      halfFilledIconData: Icons.star_half,
+                                      color: Colors.amber,
+                                      borderColor: Colors.grey,
+                                      spacing: 0.0,
+                                    ),
+                                    Text(
+                                      "(4.3)",
+                                    )
+                                  ]),
+                                  Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    child: Text(
+                                      "11:20:02 , 20/08/2019",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.black26,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                          15, 15, 15, 15),
+                                      child: Text(
+                                        "Nice product and your delivery is so good. I'm very satified.",
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.black,
+                                        ),
+                                      )),
+                                ],
+                              ),
                             ],
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    "https://i.pinimg.com/236x/b5/0e/31/b50e311008e481dafae4be71f44f5d1f.jpg"),
-                                radius: 15,
-                              )),
-                        ),
-                      ],
-                    )
+                          Container(
+                              margin: EdgeInsets.fromLTRB(15, 0, 0, 15),
+                              height: 150,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: listImage.length,
+                                  itemBuilder: (context, index) {
+                                    String image = listImage[index];
+                                    return Padding(
+                                        padding: EdgeInsets.only(right: 20),
+                                        child: Image.network(
+                                          image,
+                                          fit: BoxFit.fill,
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              4,
+                                          height: 150,
+                                          colorBlendMode: BlendMode.darken,
+                                        ));
+                                  }))
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                "https://i.pinimg.com/236x/b5/0e/31/b50e311008e481dafae4be71f44f5d1f.jpg"),
+                            radius: 15,
+                          )),
+                    ),
+                  ],
+                )
+
                   ],
                 ),
               ),
@@ -766,9 +778,9 @@ class _Product_DetailState extends State<Product_Detail> {
                     margin: EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color:Colors.white,
+                        color:Colors.grey,
                         border: Border.all(color: Colors.black12, width: 2)),
-                    child: Icon(Icons.favorite,color: state.data.isFavorite==false?Colors.grey: Colors.red,),
+                    child: Icon(Icons.favorite,size: 30,color: state.data.isFavorite==false?Colors.white: Colors.red,),
                   ),
                   onTap: (){
                         context.bloc<ProductDetailBloc>().add(FavoriteTapEvent(person_id: context.bloc<LoginBloc>().getid,product_id: state.data.id));
@@ -841,7 +853,27 @@ class _Product_DetailState extends State<Product_Detail> {
 
 
                                          context.bloc<ProductDetailBloc>().add(AddtocartEvent(person_id: context.bloc<LoginBloc>().getid,product_id:context.bloc<ProductDetailBloc>().productDetail.id ,option_amount_id: option_amountId,amount: 1));
+                                         showDialog(
+                                           context: context,
+                                           builder: (BuildContext context) {
+                                             // return object of type Dialog
+                                             return AlertDialog(
+                                               title: new Text("Lưu ý!"),
+                                               content: new Text(
+                                                   "Sản Phẩm đã được thêm vào giỏ"),
+                                               actions: <Widget>[
+                                                 // usually buttons at the bottom of the dialog
+                                                 new FlatButton(
+                                                   child: new Text("Ok"),
+                                                   onPressed: () {
+                                                     Navigator.of(context).pop();
+                                                   },
+                                                 ),
 
+                                               ],
+                                             );
+                                           },
+                                         );
                     }
                   },
                 ),

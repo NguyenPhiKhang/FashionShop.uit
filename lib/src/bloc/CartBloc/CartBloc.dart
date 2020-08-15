@@ -14,7 +14,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   GraphQLClient _client = graphQLConfiguration.clientToQuery();
 
   List<OrderItem> list_data = [];
-   int totalPrice;
+   double totalPrice;
    double discount;
   @override
   // TODO: implement initialState

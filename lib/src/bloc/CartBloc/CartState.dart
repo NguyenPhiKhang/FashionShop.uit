@@ -2,7 +2,6 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:fashionshop/src/model/OrderItem.dart';
-import 'package:fashionshop/src/model/ProductDetail.dart';
 
 
 abstract class CartState extends Equatable {

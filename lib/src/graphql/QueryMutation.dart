@@ -8,6 +8,11 @@ String Login = '''
                 person{
                   name
                   _id
+                  avatar
+                  number_phone
+                  birthday
+                  shipping_address
+                  sex
                 }
               }
            }
@@ -271,5 +276,76 @@ query getFavorites(\$person_id: ID){
 String actionFavorite= '''
 mutation actionFavorite(\$person_id: ID,\$product_id: ID){
   actionFavorite(person_id: \$person_id, product_id: \$product_id)
+}
+''';
+
+
+String createOrder= '''
+mutation createOrder(\$person_id: ID!,\$price_ship: Float,\$total_price : Float, \$address : String,\$method_payment: String,\$carts: [ID])
+{
+  createOrder(orderInput:{
+    	person_id: \$person_id,
+    	price_ship: \$price_ship,
+    	total_price: \$total_price,
+    	address: \$address,
+    	method_payment: \$method_payment,
+    	carts: \$carts
+		})
+  
+  {
+    person{
+      _id
+    }
+  }
+    
+}
+''';
+
+
+String getOrder = '''
+ query getOrder(\$person_id: ID){
+  getOrder(person_id: \$person_id)
+  {
+    _id
+    price_ship
+    total_price
+    address
+    method_payment
+    carts{
+        isReview
+      _id
+      product{
+        name
+        img_url
+        final_price
+      }
+      option_amount{
+        option_color{
+          name
+        }
+        option_size{
+          name
+        }
+      }
+      amount
+      
+    }
+    delivery_status
+    shipping_unit
+    createdAt
+    
+  }
+}
+''';
+
+
+String createReview = '''
+mutation createReview(\$cartItem_id: ID!,\$data: String!,\$images: [String],\$star: Int!)
+{
+  createReview(cartItem_id: \$cartItem_id,data: \$data, images: \$images,star: \$star)
+  {
+    _id
+  }
+  
 }
 ''';

@@ -3,6 +3,7 @@ import 'package:fashionshop/src/bloc/CartBloc/CartBloc.dart';
 import 'package:fashionshop/src/bloc/CartBloc/CartEvent.dart';
 import 'package:fashionshop/src/bloc/CartBloc/CartState.dart';
 import 'package:fashionshop/src/bloc/SearchBloc/SearchBloc.dart';
+import 'package:fashionshop/src/bloc/checkout_bloc/checkout_bloc.dart';
 
 import 'package:fashionshop/src/model/OrderItem.dart';
 import 'package:fashionshop/src/resources/CheckOut_Screen.dart';
@@ -26,6 +27,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   String Voucher = "Nhấn để chọn voucher";
   bool chooseAll =true;
+  List<OrderItem> list_chosen=[];
 
   @override
   void initState() {
@@ -34,8 +36,18 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-      print("Build");
+                chooseAll =true;
+           for(int i=0;i<state.data.length;i++)
+             {
+               if(state.data[i].isChosen==false)
+                 {
+                   chooseAll=false;
+                   break;
+                 }
+             }
+
       if (state == Initial()) return Container();
       return Scaffold(
         appBar: AppBar(
@@ -97,7 +109,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(8),
               height: MediaQuery.of(context).size.height - 320,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
@@ -388,9 +400,23 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
               onTap: () {
+                list_chosen=[];
+                for(int i =0 ; i<state.data.length;i++)
+                  {  if(state.data[i].isChosen)
+                    list_chosen.add(state.data[i]);
+                  }
+//                print(list_chosen);
+
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CheckOutScreen()),
+                  MaterialPageRoute(builder: (context) => BlocProvider<CheckoutBloc>(
+                      create: (context){
+                        return CheckoutBloc(
+
+                        );
+                      },
+                      child: CheckOutScreen(listOrderItem: list_chosen,orderPrice: state.totalPrice,)),
+                  )
                 );
               },
             )

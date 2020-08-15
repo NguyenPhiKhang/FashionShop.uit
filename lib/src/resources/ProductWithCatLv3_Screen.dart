@@ -422,7 +422,7 @@ controller: _scrollController2,
                             },
                                 icon: Icon(
                                   Icons.import_export, color: Colors.black,),
-                                label: Text("Price: ")),
+                                label: Text(value)),
                             onTap: () {
 
                             },

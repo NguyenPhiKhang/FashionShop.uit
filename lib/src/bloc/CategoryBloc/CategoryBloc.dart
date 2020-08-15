@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:fashionshop/src/config/GraphQLConfiguration.dart';
 import 'package:fashionshop/src/graphql/QueryMutation.dart';
 import 'package:fashionshop/src/model/Category.dart';
-import 'package:fashionshop/src/resources/ExploreScreen.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';

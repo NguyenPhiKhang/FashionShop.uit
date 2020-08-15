@@ -197,7 +197,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               textTheme: TextTheme(),
               backgroundColor: Color(0xFF4ab3b5),
               title: Text(
-                "Explore",
+                "Danh mục",
                 style: TextStyle(color: Colors.white),
               ),
               bottom: TabBar(
