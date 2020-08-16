@@ -23,11 +23,9 @@ Fashion Shop APP
 <pre>
 <b>1. Nguyễn Phi Khang</b>   - 17520616
 <b>2. Nguyễn Quang Khang</b> - 17520617
-<b>3. Trần Anh Thắng</b>   - 17520159
-<b>4. Trương Công Tấn Phát</b> - 17520884
 </pre>
 
-### 👩‍💼 Teacher: Huỳnh Tuấn Anh
+### 👩‍💼 Teacher: Nguyễn Công Hoan
 ---
 
 ## 🌟 Features
