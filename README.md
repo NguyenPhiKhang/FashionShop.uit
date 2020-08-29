@@ -27,7 +27,8 @@ Fashion Shop APP
 <b>4. Trương Công Tấn Phát</b> - 17520884
 </pre>
 
-### 👩‍💼 Teacher: Huỳnh Tuấn Anh
+### 👨‍🏫 Teacher: Huỳnh Tuấn Anh
+### Score: 9
 ---
 
 ## 🌟 Features
@@ -61,7 +62,7 @@ Fashion Shop APP
 - loading_gifs
 - image_picker
 
-## ✨ Screenshots
+## 📷 Screenshots
 <table style="width:100%">
 <tr>
     <th width=300> <p align="center">
