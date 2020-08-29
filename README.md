@@ -46,7 +46,10 @@ Fashion Shop APP
 -	Quản lý các đơn hàng khuyến mãi nổi lên trang đầu
 
 ## Server
-- [GraphQL](https://github.com/NguyenPhiKhang/fashionshop_server.uit)
+- [GraphiQL](https://github.com/NguyenPhiKhang/fashionshop_server.uit)
+
+## Admin
+- [Admin](https://github.com/NguyenPhiKhang/FashionShop_Admin.uit)
 
 ## Dependencies
 - firebase_database
