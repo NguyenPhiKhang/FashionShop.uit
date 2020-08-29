@@ -45,8 +45,21 @@ Fashion Shop APP
 -	Quản lý các đơn hàng khuyến mãi nổi lên trang đầu
 
 ## Server
-- NodeJS
-- GraphQL
+- [GraphQL](https://github.com/NguyenPhiKhang/fashionshop_server.uit)
+
+## Dependencies
+- firebase_database
+- graphql_flutter
+- http
+- equatable
+- flutter_bloc
+- smooth_star_rating
+- carousel_slider
+- file_picker
+- mime_type
+- http_parser
+- loading_gifs
+- image_picker
 
 ## ✨ Screenshots
 <table style="width:100%">
